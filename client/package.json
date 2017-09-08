@@ -12,8 +12,8 @@
   },
   "scripts": {
     "postinstall": "yarn build-css",
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "yarn build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "build-css": "node-sass-chokidar src/sass -o src/styles",
+    "watch-css": "yarn build-css && node-sass-chokidar src/sass -o src/styles --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
