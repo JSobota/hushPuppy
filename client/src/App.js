@@ -8,7 +8,7 @@ import './App.css';
 function Routes () {
   return (
     <Router>
-      <div>
+      <div className="ugly">
         <ul>
           <li><Link to="/test1">Test Page 1</Link></li>
           <li><Link to="/test2">Test Page 2</Link></li>
