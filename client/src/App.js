@@ -24,8 +24,12 @@ function Routes () {
            * path prop */ }
 
         <Route exact path="/test1" component={Test1} />
-        <Route exact path="/test2" component={Test2} />
-        <Route exact path="/test3" component={Test3} />
+
+        <Route exact path="/test2" render={() => {
+            return ( <Test2 coolProp="cool!" /> )
+        }} />
+
+      <Route exact path="/test3" render={() => (<Test3 nice="REALLY NICE"/>)} />
         <Route exact path="/api-tester" component={ApiTester} />
       </div>
     </Router>
@@ -33,22 +37,42 @@ function Routes () {
 }
 
 function Test1 () {
-  return (<div>We are on test page #1</div>)
+  return (<div>We are on test page #1. Plain function component</div>)
 }
 
-function Test2 () {
-  return (<div>We are on test page #2</div>)
+function Test2 (props) {
+  return (<div>We are on test page #2. Function component with props. Our props are: {props.coolProp}</div>)
 }
 
-function Test3 () {
-  return (<div>We are on test page #3</div>)
+class Test3 extends Component {
+
+  constructor (props) {
+    // if you want to access props in constructor you need to call
+    // super on props. If you don't you can leave this out. Rember
+    // that constructor is the ONLY place we can set the initial state
+    super(props)
+
+    this.state = {
+      // this will not work if we didn't call super above!
+      propsGoIntoState: this.props
+    }
+  }
+  render () {
+    const ourState = this.state.propsGoIntoState.nice
+    return (
+      <div>
+        We are on test page #3. Class component with props Props: {this.props.nice}
+        Our state is: {ourState}
+      </div>
+    )
+  }
 }
 
 class ApiTester extends Component {
 
-  constructor (props) {
-    super(props)
-
+  constructor () {
+    super()
+    // react will yell at you if you call "this" before super()
     this.state = {
       numbersFromApi: []
     }
