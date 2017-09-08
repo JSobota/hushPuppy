@@ -13,6 +13,7 @@ function Routes () {
           <li><Link to="/test1">Test Page 1</Link></li>
           <li><Link to="/test2">Test Page 2</Link></li>
           <li><Link to="/test3">Test Page 3</Link></li>
+          <li><Link to="/api-tester">See if the api works</Link></li>
         </ul>
 
         { /* THIS IS HOW REACT DOES COMMENTS
@@ -25,6 +26,7 @@ function Routes () {
         <Route exact path="/test1" component={Test1} />
         <Route exact path="/test2" component={Test2} />
         <Route exact path="/test3" component={Test3} />
+        <Route exact path="/api-tester" component={ApiTester} />
       </div>
     </Router>
   )
@@ -42,13 +44,37 @@ function Test3 () {
   return (<div>We are on test page #3</div>)
 }
 
-class App extends Component {
+class ApiTester extends Component {
 
-  render() {
-    return (
-      <Routes />
-    )
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      numbersFromApi: []
+    }
   }
+
+  componentWillMount () {
+    axios.get('/api/test')
+      .then(res => this.setState({numbersFromApi: res.data.numbers}))
+  }
+
+  render () {
+    const numbers = this.state.numbersFromApi
+    const showNumbers = numbers.map(num => (<li key={num}>{ num }</li>) )
+    return (
+      <div>
+        <p> If you see "one two three four" we're good! </p>
+        <ul>
+          {showNumbers}
+        </ul>
+      </div>)
+  }
+}
+
+function App () {
+
+  return ( <Routes /> )
 }
 
 export default App;
