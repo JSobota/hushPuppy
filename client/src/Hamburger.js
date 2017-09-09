@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu'
 import { Link } from 'react-router-dom'
+// eslint-disable-next-line
 import hamburger from './styles/hamburger.css'
 
 class Hamburger extends Component {
