@@ -1,0 +1,8 @@
+@import '_colors';
+@import '_mixins';
+
+.brand {
+  color: $orange;
+  font-size: 2em;
+  @include centerify
+}
