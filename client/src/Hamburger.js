@@ -6,10 +6,6 @@ import hamburger from './styles/hamburger.css'
 
 class Hamburger extends Component {
   render () {
-    // styles is required for the menu to work
-
-    // link style is not required for the burger menu to work
-
     return (
       <Menu >
         <Link id="home" className="bm-link" to="/">Home</Link>
