@@ -5,15 +5,18 @@ class LoginForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      payload: null
+      payload: null,
+      name: "",
+      password: ""
     }
   }
 
   render () {
     return (
-      <div>
-        Im login
-      </div>
+      <form>
+        <input type="text" value={this.state.name} name="username" />
+        <input type="password" value={this.state.password} name="password" />
+      </form>
     )
   }
 }
