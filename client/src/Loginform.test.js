@@ -19,15 +19,15 @@ it('will initially have a blank password', () => {
 
 it('has two inputs', () => {
   const component = shallow(<LoginForm />)
-  expect(component.find('form > input').length).toBe(2)
+  expect(component.find('#loginform > input').length).toBe(2)
 })
 
 it('has a name input', () => {
   const component = shallow(<LoginForm />)
-  expect(component.find('form > input[type="text"]').get(0).props.name).toBe('username')
+  expect(component.find('#loginform > input[type="text"]').get(0).props.name).toBe('username')
 })
 
 it('has a password input', () => {
   const component = shallow(<LoginForm />)
-  expect(component.find('form > input[type="password"]').get(0).props.name).toBe('password')
+  expect(component.find('#loginform > input[type="password"]').get(0).props.name).toBe('password')
 })

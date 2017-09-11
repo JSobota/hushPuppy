@@ -21,7 +21,7 @@ class LoginForm extends Component {
 
   render () {
     return (
-      <form>
+      <form id="loginform">
         <input type="text" value={this.state.name} onChange={this.updateName} name="username" />
         <input type="password" value={this.state.password} onChange={this.updatePassword} name="password" />
       </form>
