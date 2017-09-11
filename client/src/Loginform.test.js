@@ -35,9 +35,3 @@ it('has a password input', () => {
   const component = shallow(<LoginForm />)
   expect(component.find('#loginform > input[type="password"]').get(0).props.name).toBe('password')
 })
-
-it('updates name state', () => {
-  const component = mount(<LoginForm />)
-  const input = component.find('input[type="text"]').get(0)
-  input.value = "bbbbb"
-})

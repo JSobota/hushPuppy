@@ -12,10 +12,12 @@ class LoginForm extends Component {
   }
 
   updateName(e) {
+    e.preventDefault()
     this.setState({name: e.target.value})
   }
 
   updatePassword(e) {
+    e.preventDefault()
     this.setState({password: e.target.value})
   }
 
