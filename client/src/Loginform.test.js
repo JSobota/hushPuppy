@@ -1,8 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { shallow } from 'enzyme'
 import LoginForm from './Loginform'
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<LoginForm />, div);
+it('state of ajax request must be blank', () => {
+  const component = shallow(<LoginForm />)
+  expect(component.state().payload).toBe(null)
 });
