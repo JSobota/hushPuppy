@@ -1,0 +1,64 @@
+@import '_colors.scss';
+
+/*
+   Most of these are from the github page, and chainging widths and
+   heights too drastically will cause the animations to be messed up.
+ */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: $orange;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+  margin: 0 12px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: $orange;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: $dark-bg;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+  overflow: hidden  !important;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: $dark-bg;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* styles for hambuger menu's link */
+.bm-link {
+  color: $orange;
+  text-decoration: none;
+  font-size: 2em;
+  margin-top: 30px;
+}
