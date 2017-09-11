@@ -11,11 +11,19 @@ class LoginForm extends Component {
     }
   }
 
+  updateName(e) {
+    this.setState({name: e.target.value})
+  }
+
+  updatePassword(e) {
+    this.setState({password: e.target.value})
+  }
+
   render () {
     return (
       <form>
-        <input type="text" value={this.state.name} name="username" />
-        <input type="password" value={this.state.password} name="password" />
+        <input type="text" value={this.state.name} onChange={this.updateName} name="username" />
+        <input type="password" value={this.state.password} onChange={this.updatePassword} name="password" />
       </form>
     )
   }
