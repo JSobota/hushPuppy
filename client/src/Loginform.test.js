@@ -2,11 +2,6 @@ import React from 'react'
 import { shallow, mount } from 'enzyme'
 import LoginForm from './Loginform'
 
-it('state of ajax request must be blank', () => {
-  const component = shallow(<LoginForm />)
-  expect(component.state().payload).toBe(null)
-})
-
 it('will initially have a blank name', () => {
   const component = shallow(<LoginForm />)
   expect(component.state().name).toBe("")
