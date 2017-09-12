@@ -9,6 +9,7 @@ class Hamburger extends Component {
     return (
       <Menu >
         <Link id="home" className="bm-link" to="/">Home</Link>
+        <Link id="login" className="bm-link" to="/login">Login</Link>
         <Link id="about" className="bm-link" to="/about">About</Link>
       </Menu>
     )
