@@ -54,3 +54,12 @@ describe('Input', () => {
     expect(component.state('password')).toBe('hunter2')
   })
 })
+
+describe('Submit', () => {
+  const component = mount(<LoginForm />)
+  const button = component.find('[type="submit"]')
+  component.instance().sendLogin = jest.fn()
+  component.update()
+  button.simulate('click')
+  expect(component.instance().sendLogin).toHaveBeenCalledTimes(1)
+})
