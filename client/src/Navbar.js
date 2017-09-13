@@ -9,7 +9,6 @@ function Navbar () {
     <nav className="navbar">
       <Hamburger classname="one" />
       <Brand />
-      <Link to="/login">Login</Link>
     </nav>
   )
 }
