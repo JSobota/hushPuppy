@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/loginform.css'
 
 class LoginForm extends Component {
 
@@ -30,10 +31,10 @@ class LoginForm extends Component {
 
   render () {
     return (
-      <form id="loginform">
-        <input type="text" value={this.state.name} onChange={this.updateName.bind(this)} name="username" />
-        <input type="password" value={this.state.password} onChange={this.updatePassword.bind(this)} name="password" />
-        <input type="submit" onClick={this.sendLogin.bind(this)} value="Login" />
+      <form id="loginform" className="loginform">
+        <input type="text" className="input" value={this.state.name} onChange={this.updateName.bind(this)} name="username" />
+        <input type="password" className="input" value={this.state.password} onChange={this.updatePassword.bind(this)} name="password" />
+        <input type="submit" className="button" onClick={this.sendLogin.bind(this)} value="Login" />
       </form>
     )
   }

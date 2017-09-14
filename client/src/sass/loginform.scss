@@ -1,0 +1,46 @@
+@import '_colors';
+
+.loginform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  .input, .button {
+    margin-top: 10px;
+  }
+
+  .input {
+    width: 300px;
+    box-sizing: border-box;
+    border: none;
+
+    &:focus {
+      border-bottom: 3px $orange solid;
+    }
+  }
+
+
+  .button {
+    background-color: $orange;
+    border: none;
+    color: $white;
+    width: 150px;
+    height: 50px;
+    font-size: 2em;
+
+    background: $orange;
+    background-image: linear-gradient(to bottom, $orange, #b8411a);
+    border-radius: 5px;
+    color: $white;
+    text-decoration: none;
+  }
+
+  .btn {
+
+  } .btn:hover {
+    background: $orange;
+    text-decoration: none;
+  }
+
+}
