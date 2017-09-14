@@ -28,19 +28,18 @@
     width: 150px;
     height: 50px;
     font-size: 2em;
-
     background: $orange;
     background-image: linear-gradient(to bottom, $orange, #b8411a);
     border-radius: 5px;
     color: $white;
     text-decoration: none;
+
+    &:hover {
+      background: $orange;
+      text-decoration: none;
+    }
   }
 
-  .btn {
 
-  } .btn:hover {
-    background: $orange;
-    text-decoration: none;
-  }
 
 }
