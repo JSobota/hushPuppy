@@ -1,37 +1,24 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Groups', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstname: {
+      name: {
         type: Sequelize.STRING,
-        notEmpty: true
-      },
-      lastname: {
-        type: Sequelize.STRING,
-        notEmpty: true
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
         validate: {
-          isEmail: true
+          notEmpty: true
         }
       },
-      password: {
+      inviteCode: {
         type: Sequelize.STRING,
-        allowNull: false
+        notEmpty: true
       },
-      company: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      last_login: {
+      endDate: {
         type: Sequelize.DATE
       },
       createdAt: {
@@ -42,9 +29,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    })
+    });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Groups');
   }
 };

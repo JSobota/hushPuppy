@@ -28,12 +28,13 @@ module.exports = function(sequelize, Sequelize) {
     },
     last_login: {
       type: Sequelize.DATE
-    },
-    status: {
-      type: Sequelize.ENUM("user", "admin"),
-      defaultValue: "user"
-    },
+    }
   });
+
+  User.associate = function(models) {
+    User.hasMany(models.Group);
+    User.hasMany(models.Message);
+  }
   
   return User;
 };

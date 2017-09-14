@@ -56,6 +56,7 @@ module.exports = function(passport, user) {
       passReqToCallback: true
     },
     function(req, email, password, done) {
+      console.log('hehea');
       var User = user;
       var isValidPassword = function(userpass, password) {
         return bCrypt.compareSync(password, userpass);
@@ -67,26 +68,24 @@ module.exports = function(passport, user) {
         }
       }).then(function(user) {
         if (!user) {
-          return done(null, false, {
-            message: "Email does not exist",
-            loginMessage: req.flash('loginMessage', 'Email does not exist')
-          });
+          return done(false, false,  {
+            message : 'Failure'
+          })
         }
 
         if (!isValidPassword(user.password, password)) {
-          return done(null, false, {
-            message: "Invalid password",
-            loginMessage: req.flash('loginMessage', 'Invalid Password')
-          });
+          return done(false, false,  {
+            message : 'Failure'
+          })
         }
 
         var userinfo = user.get();
-        return done(null, userinfo, {user: req.user});
+        return done(null, userinfo, {
+          success : true
+        });
       }).catch(function(err) {
         console.log("Error: ", err);
-        return done(null, false, {
-          message: "Something went wrong with Signin"
-        });
+        return done(err, null, null);
       });
     }
   ));

@@ -24,7 +24,6 @@ for (var i = 0; i < 50; i++) {
       lastname: faker.name.lastName(),
       email: 'admin' + (i - 24) + '@gmail.com',
       password: tempPassword,
-      status: 'admin',
       createdAt: new Date(),
       updatedAt: new Date()
     }
