@@ -14,12 +14,11 @@
     width: 300px;
     box-sizing: border-box;
     border: none;
-
+    font-size: 2em;
     &:focus {
       border-bottom: 3px $orange solid;
     }
   }
-
 
   .button {
     background-color: $orange;
@@ -29,7 +28,7 @@
     height: 50px;
     font-size: 2em;
     background: $orange;
-    background-image: linear-gradient(to bottom, $orange, #b8411a);
+    background-image: linear-gradient(to bottom, $orange, darken($orange, 10%));
     border-radius: 5px;
     color: $white;
     text-decoration: none;
