@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "node-sass-chokidar": "^0.0.3",
+    "prettier": "^1.7.0",
     "react": "^15.6.1",
     "react-burger-menu": "^2.1.6",
     "react-dom": "^15.6.1",
@@ -15,6 +16,7 @@
     "postinstall": "yarn build-css",
     "build-css": "node-sass-chokidar src/sass -o src/styles",
     "watch-css": "yarn build-css && node-sass-chokidar src/sass -o src/styles --watch --recursive",
+    "format": "prettier --write ./src/**/*.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
