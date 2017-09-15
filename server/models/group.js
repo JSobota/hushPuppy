@@ -14,13 +14,11 @@ module.exports = function(sequelize, Sequelize) {
     endDate: {
       type: Sequelize.DATE
     },
-  }, {
-    classMethods: {
-      associate: function(models) {
-        Group.belongsTo(models.User, {through: UserGroups});
-        Group.hasMany(models.Message);
-      }
-    }
   });
+  Group.associate = function(models) {
+    Group.belongsToMany(models.User, {through: 'UserGroups'});
+        Group.hasMany(models.Message);
+  }
+
   return Group;
 };

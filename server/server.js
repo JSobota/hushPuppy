@@ -48,7 +48,12 @@ app.use(function(req, res, next) {
 });
 
 module.exports = app;
-app.listen(PORT, () => console.log('running'));
+
+models.sequelize.sync({force: true}).then(function () {
+  app.listen(PORT);
+});
+
+// app.listen(PORT, () => console.log('running'));
 
 // app.get('/api/test', (req, res) => {
 //   const response = {

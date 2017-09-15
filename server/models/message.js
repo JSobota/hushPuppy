@@ -7,13 +7,19 @@ module.exports = function(sequelize, Sequelize) {
         notEmpty: true
       }
     }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        Message.belongsTo(models.User);
-        Message.belongsTo(models.Group);
-      }
-    }
   });
+  // , {
+  //   classMethods: {
+  // associate: function(models) {
+  //   Message.belongsTo(models.User);
+  //   Message.belongsTo(models.Group);
+  // }
+  //   }
+  // });
+  Message.associate = function(models) {
+    Message.belongsTo(models.User);
+    Message.belongsTo(models.Group);
+  }
+
   return Message;
 };
