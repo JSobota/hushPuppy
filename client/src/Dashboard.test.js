@@ -22,12 +22,12 @@ describe('Rendering', () => {
 
   it('has a button to search', () => {
     const component = shallow(<Dashboard />)
-    expect(component.find('input[value="Search"]').length).toBe(1)
+    expect(component.find('input[type="submit"][value="Search"]').length).toBe(1)
   })
 
   it('has a button to create', () => {
     const component = shallow(<Dashboard />)
-    expect(component.find('input[value="Create"]').length).toBe(1)
+    expect(component.find('input[type="submit"][value="Create"]').length).toBe(1)
   })
 })
 
@@ -39,4 +39,29 @@ describe('Input', () => {
     groupIdInput.simulate('change', groupIdInput)
     expect(component.state('id')).toBe("AAA-123-BBB-456")
   })
+})
+
+describe('Submit', () => {
+  describe('Create button', () => {
+    it('fires the proper callback', () => {
+      const component = mount(<Dashboard />)
+      const button = component.find('input[type="submit"][value="Create"]')
+      component.instance().createGroup = jest.fn()
+      component.update()
+      button.simulate('click')
+      expect(component.instance().createGroup).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('Search button', () => {
+    it('fires the proper callback', () => {
+      const component = mount(<Dashboard />)
+      const button = component.find('input[type="submit"][value="Search"]')
+      component.instance().search = jest.fn()
+      component.update()
+      button.simulate('click')
+      expect(component.instance().search).toHaveBeenCalledTimes(1)
+    })
+  })
+
 })
