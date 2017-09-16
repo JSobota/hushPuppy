@@ -11,11 +11,12 @@ function Routes () {
   return (
     <Router>
       <div>
-      <Navbar />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={LoginForm} />
-      <Route exact path="/signup" component={SignupForm} />
-      <Route exact path="/dashboard" component={Dashboard} />
+        <Navbar />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={LoginForm} />
+        <Route exact path="/signup" component={SignupForm} />
+        {/* add auth to dashboard route later*/}
+        <Route exact path="/dashboard" component={Dashboard} />
       </div>
     </Router>
   )
