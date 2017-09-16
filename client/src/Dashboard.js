@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GroupDisplay from './GroupDisplay'
 import './styles/dashboard.css'
 
 class Dashboard extends Component {
@@ -6,7 +7,8 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id:""
+      id:"",
+      groups: []
     }
   }
 
@@ -31,7 +33,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div id="dashboard">
-        <GroupDisplay />
+        <GroupDisplay groups={this.state.groups}/>
         <h2>Find a Group</h2>
         <input value={this.state.id} onChange={this.handleSearchChange.bind(this)} type="text" name="search" placeholder="Search..." />
         <input type="submit" className="button" onClick={this.search.bind(this)} action="submit" value="Search"/>
@@ -40,12 +42,6 @@ class Dashboard extends Component {
       </div>
     )
   }
-}
-
-function GroupDisplay() {
-  return (
-    <div className="groupBox"></div>
-  )
 }
 
 export default Dashboard
