@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import Dashboard from './Dashboard'
 
 describe('Initial State.', () => {
@@ -29,5 +29,14 @@ describe('Rendering', () => {
     const component = shallow(<Dashboard />)
     expect(component.find('input[value="Create"]').length).toBe(1)
   })
+})
 
+describe('Input', () => {
+  it('should change state when you type a group Id', () => {
+    const component = mount(<Dashboard />)
+    const groupIdInput = component.find('input[type="text"][name="search"]')
+    groupIdInput.get(0).value = "AAA-123-BBB-456"
+    groupIdInput.simulate('change', groupIdInput)
+    expect(component.state('id')).toBe("AAA-123-BBB-456")
+  })
 })
