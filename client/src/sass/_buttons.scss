@@ -16,6 +16,14 @@
   padding: 10px;
   margin: 10px;
 
+  /*
+     this is needed for input submit buttons, they do not follow the
+     same rules as anchor tags do (e.g. the <Link to="blah"> buttons on
+     the homepage)
+   */
+  font-size: 2em;
+  line-height: 1em;
+
   &:hover {
     background: $orange;
     text-decoration: none;
