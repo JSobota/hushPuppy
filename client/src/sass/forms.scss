@@ -1,5 +1,6 @@
 @import '_colors';
 @import '_buttons';
+@import '_mixins';
 
 .form {
   display: flex;
@@ -7,8 +8,8 @@
   align-items: center;
   padding-top: 10px;
 
-
-  .input, .button {
+  
+  .input {
     margin-top: 10px;
   }
 
@@ -24,4 +25,20 @@
       outline-width: 0;
     }
   }
+  .button {
+  background-color: $orange;
+  border: none;
+  color: $white;
+  width: 150px;
+  height: 50px;
+  font-size: 2em;
+  background: $orange;
+  background-image: linear-gradient(to bottom, $orange, darken($orange, 10%));
+  border-radius: 5px;
+  color: $white;
+  text-decoration: none;
+  padding: 10px; 
+  margin: 10px; 
+  @include centerify 
+
 }

@@ -1,1 +1,10 @@
 @import '_buttons';
+@import '_colors';
+@import '_mixins';
+
+
+.home { 
+	@include centerify 
+	flex-direction: column;
+	padding-top: 10%; 
+}
