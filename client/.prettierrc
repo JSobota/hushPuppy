@@ -1,0 +1,10 @@
+{
+  "filePath": "./src/**/*.js",
+  "tabWidth": 2,
+  "tabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": true
+}

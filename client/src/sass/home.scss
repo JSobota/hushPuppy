@@ -2,9 +2,23 @@
 @import '_colors';
 @import '_mixins';
 
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
 
-.home { 
-	@include centerify 
-	flex-direction: column;
-	padding-top: 10%; 
+  .button {
+    @extend .button;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+  }
+
+  p {
+    font-size: 1.5em;
+    color: $orange;
+  }
+
 }
