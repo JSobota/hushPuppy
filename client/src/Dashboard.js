@@ -40,3 +40,5 @@ function GroupDisplay() {
     <div className="groupBox"></div>
   )
 }
+
+export default DashboardSearch
