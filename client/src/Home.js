@@ -4,8 +4,9 @@ import './styles/home.css'
 
 function Home () {
   return (
-    <div>
+    <div className="home">
       <Link to="/login" className="button">Login</Link>
+      <p> or </p>
       <Link to="/signup" className="button">Signup</Link>
     </div>
   )
