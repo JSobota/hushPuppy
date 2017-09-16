@@ -5,6 +5,8 @@ import Navbar from './Navbar'
 import LoginForm from './Loginform'
 import SignupForm from './SignupForm'
 import Home from './Home'
+import Dashboard from './Dashboard'
+
 function Routes () {
   return (
     <Router>
@@ -13,6 +15,7 @@ function Routes () {
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={LoginForm} />
       <Route exact path="/signup" component={SignupForm} />
+      <Route exact path="/dashboard" component={Dashboard} />
       </div>
     </Router>
   )
