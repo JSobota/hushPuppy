@@ -35,12 +35,12 @@ class Dashboard extends Component {
       <div id="dashboard">
         <GroupDisplay groups={this.state.groups}/>
 
-        <div id="searcBar">
+        <div id="searchBar">
         <input className="searchBar" value={this.state.id} onChange={this.handleSearchChange.bind(this)} type="text" name="search" placeholder="Search..." />
-        <input type="submit" className="searchBtn" onClick={this.search.bind(this)} action="submit" value=""/>
+        <input id="searchButton" type="submit" className="searchBtn" onClick={this.search.bind(this)} action="submit" value=""/>
         </div>
         <h2>or</h2>
-        <input type="submit" className="button" onClick={this.createGroup(this)} action="submit" value="Create"/>
+        <input id="createButton" type="submit" className="button" onClick={this.createGroup(this)} action="submit" value="Create"/>
       </div>
     )
   }

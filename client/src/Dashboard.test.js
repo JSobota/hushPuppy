@@ -22,12 +22,12 @@ describe('Rendering', () => {
 
   it('has a button to search', () => {
     const component = shallow(<Dashboard />)
-    expect(component.find('input[type="submit"][value="Search"]').length).toBe(1)
+    expect(component.find('input[type="submit"]').filter('#searchButton').length).toBe(1)
   })
 
   it('has a button to create', () => {
     const component = shallow(<Dashboard />)
-    expect(component.find('input[type="submit"][value="Create"]').length).toBe(1)
+    expect(component.find('input[type="submit"]').filter('#createButton').length).toBe(1)
   })
 })
 
@@ -45,7 +45,7 @@ describe('Submit', () => {
   describe('Create button', () => {
     it('fires the proper callback', () => {
       const component = mount(<Dashboard />)
-      const button = component.find('input[type="submit"][value="Create"]')
+      const button = component.find('input[type="submit"] #createButton')
       component.instance().createGroup = jest.fn()
       component.update()
       button.simulate('click')
@@ -56,7 +56,7 @@ describe('Submit', () => {
   describe('Search button', () => {
     it('fires the proper callback', () => {
       const component = mount(<Dashboard />)
-      const button = component.find('input[type="submit"][value="Search"]')
+      const button = component.find('input[type="submit"] #searchButton')
       component.instance().search = jest.fn()
       component.update()
       button.simulate('click')
