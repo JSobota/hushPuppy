@@ -9,15 +9,16 @@ module.exports = function(sequelize, Sequelize) {
     },
     inviteCode: {
       type: Sequelize.STRING,
-      notEmpty: true
+      notEmpty: false
     },
     endDate: {
       type: Sequelize.DATE
     },
   });
+  
   Group.associate = function(models) {
-    Group.belongsToMany(models.User, {through: 'UserGroups'});
-        Group.hasMany(models.Message);
+    Group.belongsToMany(models.User, { through: 'UserGroups' });
+    Group.hasMany(models.Message);
   }
 
   return Group;

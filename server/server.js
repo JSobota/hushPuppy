@@ -49,23 +49,6 @@ app.use(function(req, res, next) {
 
 module.exports = app;
 
-models.sequelize.sync({force: true}).then(function () {
-  app.listen(PORT);
+models.sequelize.sync({force: false}).then(function () {
+  app.listen(PORT, () => console.log('running'));
 });
-
-// app.listen(PORT, () => console.log('running'));
-
-// app.get('/api/test', (req, res) => {
-//   const response = {
-//     "numbers": [
-//       "one",
-//       "two",
-//       "three",
-//       "four"
-//     ]
-//   }
-
-//   res.json(response)
-// })
-
-

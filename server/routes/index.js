@@ -7,8 +7,6 @@ require('./api/users')(router, passport);
 require('./api/group')(router);
 
 
-
-
 router.route('/group')
   .get(function(req, res) {
 
