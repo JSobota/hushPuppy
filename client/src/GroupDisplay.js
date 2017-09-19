@@ -3,21 +3,22 @@ import './styles/groupdisplay.css'
 
 function GroupDisplay(props) {
   const groups = props.groups.map(g => (
-    <div key={g.id}>
+    <li key={g.id}>
       <span>{ g.id }</span>
       <span>{ g.name }</span>
       <span>{ g.endDate }</span>
-    </div>
+    </li>
   ))
   return (
     groups.length ? (
       <div className="group-box">
-        { groups }
+        <ul>
+          { groups }
+        </ul>
       </div>
     ) : (
       <div className="group-box"> No Groups </div>
     )
   )
 }
-
 export default GroupDisplay

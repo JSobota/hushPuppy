@@ -45,3 +45,8 @@ $search-bar-height: 50px;
   }
 
 }
+
+#createButton {
+  margin: 0 auto; 
+  @include centerify 
+}
