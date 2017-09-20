@@ -41,4 +41,13 @@ describe('Input', () => {
     helper.typeIn(endDateInput, '01/22/17')
     expect(component.state('endDate')).toBe('01/22/17')
   })
+
+  it('fires right callback when clicked', () => {
+    const component = mount(<CreateForm />)
+    const button = component.find('input[type="submit"]')
+    component.instance().createEvent = jest.fn()
+    component.update()
+    button.simulate('click')
+    expect(component.instance().createEvent).toHaveBeenCalledTimes(1)
+  })
 })
