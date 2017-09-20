@@ -1,5 +1,6 @@
 const models = require('../../models/');
 const User = models.User;
+const Group = models.Group;
 
 module.exports = function(router, passport) {
   // Routes for /api/user
@@ -53,5 +54,41 @@ module.exports = function(router, passport) {
     // Delete a user
     .delete(function(req, res) {
 
+    })
+
+  router.route('/user/:id/groups')
+    .get(function (req, res) {
+      // https://github.com/sequelize/sequelize/issues/6331
+       User.findOne({
+        where: {
+          id: req.params.id
+        },
+        include: [{
+          model: Group,
+        }]
+      })
+      .then(function(user) {
+        if (!user) { 
+          return res.json({ status: false }) 
+        }
+        ////// here is where you would grab groups
+        //delete user.id
+        res.json(user);
+      })
+      .catch(function(err) {
+        console.log("Error: ", err);
+        return done(err, null, null);
+      });
+
+      // Group.findAll({
+      //   include: [{
+      //     model: User,
+      //     where: {id: req.params.id}
+      //   }]
+      // })
+      // .then(function(userGroups) {
+      //   console.log('I am here')
+      //   return res.json(userGroups);
+      // })
     })
 }

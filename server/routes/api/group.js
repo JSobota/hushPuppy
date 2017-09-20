@@ -12,6 +12,7 @@ module.exports = function(router) {
         })
         .then(newGroup => 
           { 
+            console.log('We are here');
             console.log(req.user);
             newGroup.addUser(req.user.id);
             // User.addGroup(newGroup, {role: 'admin'});
