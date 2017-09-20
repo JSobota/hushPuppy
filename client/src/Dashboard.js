@@ -35,7 +35,6 @@ class Dashboard extends Component {
 
   handleNewButtonClick(e) {
     this.setState({showCreateForm: true})
-    console.log(this.state)
   }
 
   render() {
@@ -48,7 +47,7 @@ class Dashboard extends Component {
         </div>
         <h2>or</h2>
         { this.state.showCreateForm ? <CreateForm />
-          : <button className="button" onClick={this.handleNewButtonClick.bind(this)}> New </button> }
+          : <button id="createButton" className="button" onClick={this.handleNewButtonClick.bind(this)}> New </button> }
       </div>
     )
   }

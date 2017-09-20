@@ -15,9 +15,9 @@ describe('Rendering', () => {
     expect(component.find('input[type="text"]').length).toBe(1)
   })
 
-  it('has two buttons', () => {
+  it('has one form submit button', () => {
     const component = shallow(<Dashboard />)
-    expect(component.find('input[type="submit"]').length).toBe(2)
+    expect(component.find('input[type="submit"]').length).toBe(1)
   })
 
   it('has a button to search', () => {
@@ -27,7 +27,7 @@ describe('Rendering', () => {
 
   it('has a button to create', () => {
     const component = shallow(<Dashboard />)
-    expect(component.find('input[type="submit"]').filter('#createButton').length).toBe(1)
+    expect(component.find('#createButton').length).toBe(1)
   })
 })
 
@@ -43,13 +43,13 @@ describe('Input', () => {
 
 describe('Submit', () => {
   describe('Create button', () => {
-    it('fires the proper callback', () => {
+    it('fires proper callback', () => {
       const component = mount(<Dashboard />)
-      const button = component.find('input[type="submit"] #createButton')
-      component.instance().createGroup = jest.fn()
+      const button = component.find('#createButton')
+      component.instance().handleNewButtonClick = jest.fn()
       component.update()
       button.simulate('click')
-      expect(component.instance().createGroup).toHaveBeenCalledTimes(1)
+      expect(component.instance().handleNewButtonClick).toHaveBeenCalledTimes(1)
     })
   })
 
