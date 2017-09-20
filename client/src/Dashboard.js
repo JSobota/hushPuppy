@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Link, Switch, Route } from 'react-router-dom';
 import GroupDisplay from './GroupDisplay'
+import CreateForm from './CreateForm'
 import './styles/dashboard.css'
 
 class Dashboard extends Component {
@@ -39,7 +41,12 @@ class Dashboard extends Component {
           <input id="searchButton" type="submit" className="searchBtn" onClick={this.search.bind(this)} action="submit" value=""/>
         </div>
         <h2>or</h2>
-        <input id="createButton" type="submit" className="button" onClick={this.createGroup(this)} action="submit" value="Create"/>
+        <Switch>
+          <Route exact path="/new" component={CreateForm} />
+          <Route exact path="/dashboard" render={() => {
+          return (<Link className="button" to="/new"/>)
+          }} />
+        </Switch>
       </div>
     )
   }

@@ -6,6 +6,7 @@ import LoginForm from './Loginform'
 import SignupForm from './SignupForm'
 import Home from './Home'
 import Dashboard from './Dashboard'
+import CreateForm from './CreateForm'
 
 function Routes () {
   return (
@@ -17,6 +18,7 @@ function Routes () {
         <Route exact path="/signup" component={SignupForm} />
         {/* add auth to dashboard route later*/}
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/createForm" component={CreateForm} />
       </div>
     </Router>
   )
