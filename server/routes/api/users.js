@@ -28,22 +28,22 @@ module.exports = function(router, passport) {
     // Get details for a specific user ID
     .get(function(req, res) {
       User.findOne({
-        where: {
-          id: req.params.id
-        }
-      })
-      .then(function(user) {
-        if (!user) { 
-          return res.json({ status: false }) 
-        }
-        ////// here is where you would grab groups
-        //delete user.id
-        res.json(user);
-      })
-      .catch(function(err) {
-        console.log("Error: ", err);
-        return done(err, null, null);
-      });
+          where: {
+            id: req.params.id
+          }
+        })
+        .then(function(user) {
+          if (!user) {
+            return res.json({ status: false })
+          }
+          ////// here is where you would grab groups
+          //delete user.id
+          res.json(user);
+        })
+        .catch(function(err) {
+          console.log("Error: ", err);
+          return done(err, null, null);
+        });
     })
 
     // Update a user
@@ -57,7 +57,26 @@ module.exports = function(router, passport) {
     })
 
   router.route('/user/:id/groups')
-    .get(function (req, res) {
+    .get(function(req, res) {
+
+      // Group.findAll({
+      //     include: [{
+      //       model: User,
+      //       through: {
+      //         where: { UserId: req.params.id }
+      //       }
+      //     }]
+      //   })
+      //   .then(function(results) {
+      //     if (!results) {
+      //       return res.json({ success: 'failure', message: 'no groups found' })
+      //     }
+
+      //     res.json(results)
+      //   });
+
+
+
       // https://github.com/sequelize/sequelize/issues/6331
        User.findOne({
         where: {
@@ -79,6 +98,8 @@ module.exports = function(router, passport) {
         console.log("Error: ", err);
         return done(err, null, null);
       });
+
+
 
       // Group.findAll({
       //   include: [{

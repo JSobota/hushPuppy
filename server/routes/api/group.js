@@ -6,16 +6,13 @@ module.exports = function(router) {
   router.route('/group')
     // Create a group
     .post(function(req, res) {
-      console.log(req.body);
       Group.create({
           name: req.body.name
         })
         .then(newGroup => 
           { 
-            console.log('We are here');
-            console.log(req.user);
-            newGroup.addUser(req.user.id);
-            // User.addGroup(newGroup, {role: 'admin'});
+            console.log(newGroup);
+            newGroup.addUser(req.body.id);
             res.status(201).json(newGroup);
           }
         )
