@@ -15,9 +15,9 @@ module.exports = function(sequelize, Sequelize) {
       type: Sequelize.DATE
     },
   });
-  
+
   Group.associate = function(models) {
-    Group.belongsToMany(models.User, { through: 'UserGroups' });
+    //Group.belongsToMany(models.User, { through: 'UserGroups' });
     Group.hasMany(models.Message);
   }
 
