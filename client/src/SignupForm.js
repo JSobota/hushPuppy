@@ -31,7 +31,7 @@ class SignupForm extends Component {
 
   sendRegistration(e) {
     e.preventDefault()
-    const payload = {...this.state}
+    //const payload = {...this.state}
     /*
       ajax.post(/api/login-thing, payload)
       .then(...)

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
 import GroupDisplay from './GroupDisplay'
 import CreateForm from './CreateForm'
 import './styles/dashboard.css'
@@ -17,7 +16,7 @@ class Dashboard extends Component {
 
   search(e) {
     e.preventDefault()
-    const payload = {...this.state}
+    //const payload = {...this.state}
     /*
       ajax.post(/api/login-thing, payload)
       .then(...)
@@ -26,7 +25,7 @@ class Dashboard extends Component {
   }
 
   createGroup(e) {
-    e.preventDefault
+    e.preventDefault()
   }
 
   handleSearchChange(e) {

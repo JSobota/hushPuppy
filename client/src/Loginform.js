@@ -21,7 +21,7 @@ class LoginForm extends Component {
 
   sendLogin (e) {
     e.preventDefault()
-    const payload = {...this.state}
+    //const payload = {...this.state}
     /*
       ajax.post(/api/login-thing, payload)
         .then(...)
