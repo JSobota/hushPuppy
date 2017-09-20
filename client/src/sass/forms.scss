@@ -1,0 +1,28 @@
+@import '_colors';
+@import '_buttons';
+@import '_mixins';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+
+
+  input[type=text],
+  input[type=password] {
+    margin-top: 10px;
+    width: 250px;
+
+    border: none;
+    border-bottom: 3px $white solid;
+
+    height: 50px;
+    outline: none;
+    font-size: 2em;
+    &:focus {
+      border-bottom: 3px $orange solid;
+      outline: none;
+    }
+  }
+}

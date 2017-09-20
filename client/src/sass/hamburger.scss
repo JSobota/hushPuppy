@@ -1,4 +1,7 @@
 @import '_colors.scss';
+@import '_mixins.scss';
+
+$hamburger-bg: $dark-bg;
 
 /*
    Most of these are from the github page, and chainging widths and
@@ -12,6 +15,10 @@
   height: 30px;
   left: 36px;
   top: 36px;
+
+  @include breakpoint(tablet){
+    top: 48px;
+  }
 }
 
 /* Color/shape of burger icon bars */
@@ -31,9 +38,9 @@
   background: $orange;
 }
 
-/* General sidebar styles */
+/* General sidebar styles JDT */
 .bm-menu {
-  background: $dark-bg;
+  background: $hamburger-bg;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
   overflow: hidden  !important;
@@ -41,12 +48,13 @@
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: $dark-bg;
+  fill: $hamburger-bg;
+  right: 1px;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
+  color: $dark-bg;
   padding: 0.8em;
 }
 
@@ -61,4 +69,8 @@
   text-decoration: none;
   font-size: 2em;
   margin-top: 30px;
+}
+
+.bm-link-highlight {
+  font-weight: bold;
 }

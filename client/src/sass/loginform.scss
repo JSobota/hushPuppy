@@ -1,0 +1,8 @@
+@import 'forms';
+@import '_colors';
+@import '_buttons';
+@import '_mixins';
+
+.button{
+	@include centerify
+}

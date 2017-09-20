@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { slide as Menu } from 'react-burger-menu'
-import { Link } from 'react-router-dom'
+import { elastic as Menu } from 'react-burger-menu'
+import { NavLink } from 'react-router-dom'
 // eslint-disable-next-line
-import hamburger from './styles/hamburger.css'
+import './styles/hamburger.css'
 
 class Hamburger extends Component {
+
   render () {
     return (
-      <Menu >
-        <Link id="home" className="bm-link" to="/">Home</Link>
-        <Link id="about" className="bm-link" to="/about">About</Link>
+      <Menu isOpen={ false } >
+        <NavLink exact id="home" className="bm-link" activeClassName="bm-link-highlight" to="/">Home</NavLink>
+        <NavLink id="login" className="bm-link" activeClassName="bm-link-highlight" to="/login">Login</NavLink>
+        <NavLink id="about" className="bm-link" activeClassName="bm-link-highlight" to="/about">About</NavLink>
       </Menu>
     )
   }

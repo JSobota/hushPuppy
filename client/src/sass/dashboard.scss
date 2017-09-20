@@ -1,0 +1,52 @@
+@import '_colors';
+@import '_mixins';
+@import '_buttons';
+
+$dogSearchButton: './../img/hP_searchIcon.png';
+$search-bar-height: 50px;
+
+
+.dashboard {
+  flex-basis: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBtn {
+  /* for image */
+  background-image: url($dogSearchButton);
+  background-size: cover;
+  width: $search-bar-height;
+  height: $search-bar-height;
+
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+}
+
+.searchBar {
+  width: 250px;
+  height: $search-bar-height;
+  box-sizing: border-box;
+  border: none;
+  font-size: 2em;
+  &:focus {
+    border-bottom: 3px $orange solid;
+    outline-width: 0;
+  }
+
+}
+
+#createButton {
+  margin: 0 auto; 
+  @include centerify 
+}

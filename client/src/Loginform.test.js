@@ -41,7 +41,7 @@ describe('Input', () => {
   it('should change state when you type a name', () => {
     const component = mount(<LoginForm />)
     const nameInput = component.find('input[type="text"]')
-    nameInput.node.value = "Cool!"
+    nameInput.get(0).value = "Cool!"
     nameInput.simulate('change', nameInput)
     expect(component.state('name')).toBe("Cool!")
   })
@@ -49,7 +49,7 @@ describe('Input', () => {
   it('should change state when you type a password', () => {
     const component = mount(<LoginForm />)
     const passInput = component.find('input[type="password"]')
-    passInput.node.value = "hunter2"
+    passInput.get(0).value = "hunter2"
     passInput.simulate('change', passInput)
     expect(component.state('password')).toBe('hunter2')
   })

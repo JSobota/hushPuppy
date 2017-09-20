@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/loginform.css'
 
 class LoginForm extends Component {
 
@@ -20,7 +21,7 @@ class LoginForm extends Component {
 
   sendLogin (e) {
     e.preventDefault()
-    const payload = {...this.state}
+    //const payload = {...this.state}
     /*
       ajax.post(/api/login-thing, payload)
         .then(...)
@@ -30,10 +31,10 @@ class LoginForm extends Component {
 
   render () {
     return (
-      <form id="loginform">
-        <input type="text" value={this.state.name} onChange={this.updateName.bind(this)} name="username" />
-        <input type="password" value={this.state.password} onChange={this.updatePassword.bind(this)} name="password" />
-        <input type="submit" onClick={this.sendLogin.bind(this)} value="Login" />
+      <form id="loginform" className="form">
+        <input type="text" className="input" value={this.state.name} onChange={this.updateName.bind(this)} name="username" placeholder="username" />
+        <input type="password" className="input" value={this.state.password} onChange={this.updatePassword.bind(this)} name="password" placeholder="password"/>
+        <input type="submit" className="button" onClick={this.sendLogin.bind(this)} action="submit" value ="Login"/>
       </form>
     )
   }
