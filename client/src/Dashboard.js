@@ -42,7 +42,7 @@ class Dashboard extends Component {
         </div>
         <h2>or</h2>
         <Switch>
-          <Route exact path="/new" component={CreateForm} />
+          <Route exact path="/new" render={CreateForm} />
           <Route exact path="/dashboard" render={() => {
           return (<Link className="button" to="/new"/>)
           }} />
