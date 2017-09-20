@@ -28,7 +28,7 @@ class LoginForm extends Component {
     }
     axios.post('/api/user', data)
       .then(r => console.log(r))
-      //.catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 
   render () {
