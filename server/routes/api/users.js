@@ -32,8 +32,8 @@ module.exports = function(router, passport) {
         }
       })
       .then(function(user) {
-        if (!user) { 
-          return res.json({ status: false }) 
+        if (!user) {
+          return res.json({ status: false })
         }
         ////// here is where you would grab groups
         //delete user.id
