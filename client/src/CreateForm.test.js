@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import CreateForm from './CreateForm'
+import helper from './test-helpers'
 
 describe('Initial State.', () => {
   it('has an empty group name', () => {
@@ -30,16 +31,14 @@ describe('Input', () => {
   it('typing group name updates state', () => {
     const component = mount(<CreateForm />)
     const groupNameInput = component.find('input[name="groupName"]')
-    groupNameInput.get(0).value = 'Group Name'
-    groupNameInput.simulate('change',groupNameInput)
+    helper.typeIn(groupNameInput, 'Group Name')
     expect(component.state('groupName')).toBe('Group Name')
   })
 
   it('typing an end date updates state', () => {
     const component = mount(<CreateForm />)
     const endDateInput = component.find('input[name="endDate"]')
-    endDateInput.get(0).value = '01/22/17'
-    endDateInput.simulate('change',endDateInput)
+    helper.typeIn(endDateInput, '01/22/17')
     expect(component.state('endDate')).toBe('01/22/17')
   })
 })
