@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import './styles/loginform.css'
 
 class LoginForm extends Component {
@@ -21,7 +22,10 @@ class LoginForm extends Component {
 
   sendLogin (e) {
     e.preventDefault()
-    //const payload = {...this.state}
+    const payload = {...this.state}
+    axios.post('/api/user', payload)
+      .then(r => console.log(r))
+      .catch(err => console.log(err))
     /*
       ajax.post(/api/login-thing, payload)
         .then(...)
