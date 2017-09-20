@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './styles/createForm.css'
 
 class CreateForm extends Component {
@@ -9,19 +8,19 @@ class CreateForm extends Component {
     this.state = {
       groupName: "",
       endDate: "",
-      
+
     }
   }
 
   updateGroupName (e) {
-    this.setState({firstName: e.target.value})
+    this.setState({groupName: e.target.value})
   }
 
   updateEndNDate (e) {
-    this.setState({lastName: e.target.value})
+    this.setState({endDate: e.target.value})
   }
 
-  sendRegistration(e) {
+  createEvent(e) {
     e.preventDefault()
     const payload = {...this.state}
     /*
@@ -33,7 +32,7 @@ class CreateForm extends Component {
 
   render () {
     return (
-		 <form id="createGroupform" className="form">
+      <form id="createGroupform" className="form">
         <input value={this.state.goupName}
                onChange={this.updateGroupName.bind(this)}
                type="text"
@@ -49,9 +48,9 @@ class CreateForm extends Component {
                placeholder="End Date" />
 
 
-        <input type="submit" className="button" onClick={this.sendRegistration.bind(this)} value="Create" />
-      </form> 
-          )
+        <input type="submit" className="button" onClick={this.createEvent.bind(this)} value="Create" />
+      </form>
+    )
   }
 }
 
