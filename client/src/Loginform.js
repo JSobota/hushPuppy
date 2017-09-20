@@ -22,6 +22,13 @@ class LoginForm extends Component {
 
   sendLogin (e) {
     e.preventDefault()
+    const data = {
+      email: this.state.name,
+      password: this.state.password
+    }
+    axios.post('/api/user', data)
+      .then(r => console.log(r))
+      //.catch(err => console.log(err))
   }
 
   render () {
