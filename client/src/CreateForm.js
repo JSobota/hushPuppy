@@ -16,7 +16,7 @@ class CreateForm extends Component {
     this.setState({groupName: e.target.value})
   }
 
-  updateEndNDate (e) {
+  updateEndDate (e) {
     this.setState({endDate: e.target.value})
   }
 
@@ -41,7 +41,7 @@ class CreateForm extends Component {
                placeholder="Group Name" />
 
         <input value={this.state.endDate}
-               onChange={this.updateEndNDate.bind(this)}
+               onChange={this.updateEndDate.bind(this)}
                type="text"
                className="input"
                name="endDate"

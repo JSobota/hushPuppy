@@ -46,7 +46,7 @@ class Dashboard extends Component {
         </div>
         <h2>or</h2>
         { this.state.showCreateForm ? <CreateForm />
-          : <button id="createButton" className="button" onClick={this.handleNewButtonClick.bind(this)}> New </button> }
+        : <button id="createButton" className="button" onClick={this.handleNewButtonClick.bind(this)}> New </button> }
       </div>
     )
   }
