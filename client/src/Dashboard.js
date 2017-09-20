@@ -10,7 +10,8 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       id:"",
-      groups: []
+      groups: [],
+      showCreateForm: false
     }
   }
 
@@ -32,6 +33,11 @@ class Dashboard extends Component {
     this.setState({id: e.target.value})
   }
 
+  handleNewButtonClick(e) {
+    this.setState({showCreateForm: true})
+    console.log(this.state)
+  }
+
   render() {
     return (
       <div id="dashboard" className="dashboard">
@@ -41,12 +47,8 @@ class Dashboard extends Component {
           <input id="searchButton" type="submit" className="searchBtn" onClick={this.search.bind(this)} action="submit" value=""/>
         </div>
         <h2>or</h2>
-        <Switch>
-          <Route exact path="/new" render={CreateForm} />
-          <Route exact path="/dashboard" render={() => {
-          return (<Link className="button" to="/new"/>)
-          }} />
-        </Switch>
+        { this.state.showCreateForm ? <CreateForm />
+          : <button className="button" onClick={this.handleNewButtonClick.bind(this)}> New </button> }
       </div>
     )
   }

@@ -18,7 +18,7 @@ function Routes () {
         <Route exact path="/signup" component={SignupForm} />
         {/* add auth to dashboard route later*/}
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/createForm" component={CreateForm} />
+        <Route exact path="/new" component={CreateForm} />
       </div>
     </Router>
   )
