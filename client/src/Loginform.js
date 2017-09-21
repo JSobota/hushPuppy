@@ -43,6 +43,8 @@ class LoginForm extends Component {
     }
     axios.post('/api/user', data)
       .then(res => {
+        // if the response we get is a succcess, then we redirect them
+        // to the dashboard
         if (res.data.success) {
           this.setState({redirect: true})
         }
