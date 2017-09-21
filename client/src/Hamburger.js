@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { elastic as Menu } from 'react-burger-menu'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 // eslint-disable-next-line
 import './styles/hamburger.css'
 
@@ -11,7 +11,7 @@ class Hamburger extends Component {
       <Menu isOpen={ false } >
         <NavLink exact id="home" className="bm-link" activeClassName="bm-link-highlight" to="/">Home</NavLink>
         <NavLink id="login" className="bm-link" activeClassName="bm-link-highlight" to="/login">Login</NavLink>
-        <NavLink id="about" className="bm-link" activeClassName="bm-link-highlight" to="/about">About</NavLink>
+        <Link id="about" className="bm-link" to="/logout">Logout</Link>
       </Menu>
     )
   }

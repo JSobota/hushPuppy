@@ -21,6 +21,12 @@ module.exports = function(router, passport) {
         });
       })(req, res, next);
     })
+  router.route('/logout')
+    .get(function (req, res) {
+      console.log(req.user)
+      req.logout()
+      return res.send({status: true, message: 'Logged out'})
+    })
 
   // Routes for /api/user/:id
   router.route('/user/:id')
