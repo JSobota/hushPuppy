@@ -10,8 +10,21 @@ class LoginForm extends Component {
     this.state = {
       name: "",
       password: "",
-      redirect: false
+      redirect: false,
+      loggedIn: false
     }
+  }
+
+  componentDidMount() {
+    axios.get('/api/auth-check')
+      .then(res => {
+        // 200 status code means we're logged in
+         if (res.status === 200 ) {
+           this.setState({loggedIn: true})
+         } else {
+           this.setState({loggedIn: false})
+         }
+      })
   }
 
   updateName (e) {
@@ -38,13 +51,15 @@ class LoginForm extends Component {
   }
 
   render () {
+    // kind of ugly hack
     return (
       this.state.redirect ? <Redirect to="dashboard" /> :
-        <form id="loginform" className="form">
+        !this.state.loggedIn ? <form id="loginform" className="form">
         <input type="text" className="input" value={this.state.name} onChange={this.updateName.bind(this)} name="username" placeholder="username" />
         <input type="password" className="input" value={this.state.password} onChange={this.updatePassword.bind(this)} name="password" placeholder="password"/>
         <input type="submit" className="button" onClick={this.sendLogin.bind(this)} action="submit" value ="Login"/>
-        </form>
+        </form> : <div>Already logged in!</div>
+
 
     )
   }

@@ -27,6 +27,18 @@ module.exports = function(router, passport) {
       req.logout()
       return res.send({status: true, message: 'Logged out'})
     })
+  router.route('/auth-check')
+    .get(function (req, res) {
+      if (req.user) {
+        const { id, firstname } = req.user
+        return res.send({
+          id,
+          firstName: firstname
+        })
+      } else {
+        res.send(204)
+      }
+    })
 
   // Routes for /api/user/:id
   router.route('/user/:id')
