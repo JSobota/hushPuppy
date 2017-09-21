@@ -22,6 +22,24 @@ module.exports = function(router, passport) {
         });
       })(req, res, next);
     })
+  router.route('/logout')
+    .get(function (req, res) {
+      console.log(req.user)
+      req.logout()
+      return res.send({status: true, message: 'Logged out'})
+    })
+  router.route('/auth-check')
+    .get(function (req, res) {
+      if (req.user) {
+        const { id, firstname } = req.user
+        return res.send({
+          id,
+          firstName: firstname
+        })
+      } else {
+        res.send(204)
+      }
+    })
 
   // Routes for /api/user/:id
   router.route('/user/:id')
@@ -87,8 +105,8 @@ module.exports = function(router, passport) {
         }]
       })
       .then(function(user) {
-        if (!user) { 
-          return res.json({ status: false }) 
+        if (!user) {
+          return res.json({ status: false })
         }
         ////// here is where you would grab groups
         //delete user.id
