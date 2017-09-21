@@ -1,6 +1,15 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import LoginForm from './Loginform'
+import axios from 'axios'
+
+axios.post = jest.fn(
+  (url) => Promise.resolve()
+)
+
+axios.get = jest.fn(
+  (url) => Promise.resolve(() => ({blank: "object"}))
+)
 
 describe('Initial State.', () => {
   it('should have a blank name', () => {
