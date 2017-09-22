@@ -11,7 +11,7 @@ class Hamburger extends Component {
       <Menu isOpen={ false } >
         <NavLink exact id="home" className="bm-link hvr-grow" activeClassName="bm-link-highlight" to="/">Home</NavLink>
         <NavLink id="login" className="bm-link hvr-grow" activeClassName="bm-link-highlight" to="/login">Login</NavLink>
-        <NavLink id="logout" className="bm-link hvr-grow" activeClassName="bm-link-highlight" to="/logout">About</NavLink>
+        <NavLink id="logout" className="bm-link hvr-grow" activeClassName="bm-link-highlight" to="/logout">Logout</NavLink>
         </Menu>
     )
   }
