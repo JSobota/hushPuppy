@@ -5,9 +5,9 @@ import './styles/home.css'
 function Home () {
   return (
     <div className="home">
-      <Link to="/login" className="button">Login</Link>
+      <Link to="/login" className="button hvr-grow-shadow">Login</Link>
       <p> or </p>
-      <Link to="/signup" className="button">Signup</Link>
+      <Link to="/signup" className="button hvr-grow-shadow">Signup</Link>
     </div>
   )
 }
