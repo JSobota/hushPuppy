@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import LoadingSpinnerDecorator from './LoadingSpinnerDecorator'
 import './styles/loginform.css'
-import Spinner from 'react-spinkit'
+
 class LoginForm extends Component {
 
   constructor(props) {
@@ -25,7 +26,7 @@ class LoginForm extends Component {
         } else {
           this.setState({loggedIn: false})
         }
-        this.setState({loading: false })
+        this.setState({loading: false})
       })
   }
 
@@ -58,24 +59,12 @@ class LoginForm extends Component {
     const state = this.state
     // kind of ugly hack
     return (
-      <Form {...state}
-            updateName={this.updateName.bind(this)}
-            updatePassword={this.updatePassword.bind(this)}
-            sendLogin={this.sendLogin.bind(this)}
-            />
+      <SpinOrForm loading={this.state.loading} />
     )
   }
 }
 
-function LoadingOrForm(args) {
-
-}
-
-function LoadingSpinner(props) {
-  return (
-    props.loading ? <Spinner name='cube-grid' /> : null
-  )
-}
+const SpinOrForm = LoadingSpinnerDecorator(<Form />)
 
 function Form(props) {
   return (
@@ -86,4 +75,5 @@ function Form(props) {
     </form>
   )
 }
+
 export default LoginForm
