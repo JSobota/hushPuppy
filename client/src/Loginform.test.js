@@ -25,23 +25,23 @@ describe('Initial State.', () => {
 
 describe('Rendering' , () => {
   it('should have two inputs', () => {
-    const component = shallow(<LoginForm />)
+    const component = mount(<LoginForm />)
     expect(component.find('#loginform > input').not('input[type="submit"]').length).toBe(2)
   })
 
   it('should have a submit button', () => {
-    const component = shallow(<LoginForm />)
+    const component = mount(<LoginForm />)
     expect(component.find('#loginform > input').filter('input[type="submit"]').length).toBe(1)
   })
 
   it('should have a name input', () => {
-    const component = shallow(<LoginForm />)
-    expect(component.find('#loginform > input[type="text"]').get(0).props.name).toBe('username')
+    const component = mount(<LoginForm />)
+    expect(component.find('#loginform > input[type="text"]').props().name).toBe('username')
   })
 
   it('should have a password input', () => {
-    const component = shallow(<LoginForm />)
-    expect(component.find('#loginform > input[type="password"]').get(0).props.name).toBe('password')
+    const component = mount(<LoginForm />)
+    expect(component.find('#loginform > input[type="password"]').props().name).toBe('password')
   })
 })
 
