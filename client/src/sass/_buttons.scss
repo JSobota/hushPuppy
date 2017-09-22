@@ -13,22 +13,19 @@
   color: $white;
   text-decoration: none;
   margin: 10px;
-  @include centerify
-  padding-top: 10px;
+  text-align: center;
   /*
      this is needed for input submit buttons, they do not follow the
      same rules as anchor tags do (e.g. the <Link to="blah"> buttons on
      the homepage)
    */
   font-size: 2em;
-  line-height: 1em;
+  line-height: 1.5em;
 
   /* this is for anchor links (or things that turn into them, like <Link>) */
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-content: center;
-  text-align: center;
+  align-items: center;
 
   &:hover {
     background: $orange;
@@ -51,4 +48,3 @@
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-
