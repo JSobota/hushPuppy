@@ -19,18 +19,18 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
 // For Passport
 app.use(session({
   secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 })); // session secret
 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
 require('./config/passport/passport')(passport, models.User);
-
 
 app.use(function(req, res, next) {
   res.locals.user = req.user;
@@ -48,6 +48,6 @@ app.use(function(req, res, next) {
 
 module.exports = app;
 
-models.sequelize.sync({force: false}).then(function () {
+models.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, () => console.log('running'));
 });
