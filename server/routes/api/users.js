@@ -37,7 +37,7 @@ module.exports = function(router, passport) {
           firstName: firstname
         })
       } else {
-        res.send(204)
+        res.status(204).send({status: false, message: 'No user logged in'});
       }
     })
 
