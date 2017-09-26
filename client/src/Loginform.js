@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import Spinner from 'react-spinkit'
 import { Redirect } from 'react-router-dom'
-import LoadingSpinnerDecorator from './LoadingSpinnerDecorator'
 import './styles/loginform.css'
+import './styles/spinner.css'
 
 class LoginForm extends Component {
 
@@ -60,13 +61,23 @@ class LoginForm extends Component {
     // kind of ugly hack
 
     return (
-      <form id="loginform" className="form">
-        <input type="text" className="input" value={this.state.name} onChange={this.updateName.bind(this)} name="username" placeholder="username" />
-        <input type="password" className="input" value={this.state.password} onChange={this.updatePassword.bind(this)} name="password" placeholder="password"/>
-        <input type="submit" className="button" onClick={this.sendLogin.bind(this)} action="submit" value ="Login"/>
-      </form>
+      this.state.loading ? (
+        <Spinner className="spinner"
+                 fadeIn="none"
+                 name='ball-spin-fade-loader' />
+      ) : this.state.loggedIn ? <LoggedIn /> : (<form id="loginform" className="form">
+           <input type="text" className="input" value={this.state.name} onChange={this.updateName.bind(this)} name="username" placeholder="username" />
+           <input type="password" className="input" value={this.state.password} onChange={this.updatePassword.bind(this)} name="password" placeholder="password"/>
+           <input type="submit" className="button" onClick={this.sendLogin.bind(this)} action="submit" value ="Login"/>
+           </form>)
     )
   }
+}
+
+function LoggedIn(props) {
+  return (
+    <span>You're already logged in</span>
+  )
 }
 
 export default LoginForm
