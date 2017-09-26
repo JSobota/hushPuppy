@@ -9,10 +9,10 @@ class Hamburger extends Component {
   render () {
     return (
       <Menu isOpen={ false } >
-        <NavLink exact id="home" className="bm-link" activeClassName="bm-link-highlight" to="/">Home</NavLink>
-        <NavLink id="login" className="bm-link" activeClassName="bm-link-highlight" to="/login">Login</NavLink>
-        <Link id="about" className="bm-link" to="/logout">Logout</Link>
-      </Menu>
+        <NavLink exact id="home" className="bm-link hvr-grow" activeClassName="bm-link-highlight" to="/">Home</NavLink>
+        <NavLink id="login" className="bm-link hvr-grow" activeClassName="bm-link-highlight" to="/login">Login</NavLink>
+        <NavLink id="logout" className="bm-link hvr-grow" activeClassName="bm-link-highlight" to="/logout">Logout</NavLink>
+        </Menu>
     )
   }
 }

@@ -64,7 +64,7 @@ class SignupForm extends Component {
                name="password"
                placeholder="password" />
 
-        <input type="submit" className="button" onClick={this.sendRegistration.bind(this)} value="Signup" />
+        <input type="submit" className="button hvr-grow-shadow" onClick={this.sendRegistration.bind(this)} value="Signup" />
       </form>
     )
   }
