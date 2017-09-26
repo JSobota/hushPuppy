@@ -58,22 +58,15 @@ class LoginForm extends Component {
   render () {
     const state = this.state
     // kind of ugly hack
+
     return (
-        <SpinOrForm loading={this.state.loading} />
+      <form id="loginform" className="form">
+        <input type="text" className="input" value={this.state.name} onChange={this.updateName.bind(this)} name="username" placeholder="username" />
+        <input type="password" className="input" value={this.state.password} onChange={this.updatePassword.bind(this)} name="password" placeholder="password"/>
+        <input type="submit" className="button" onClick={this.sendLogin.bind(this)} action="submit" value ="Login"/>
+      </form>
     )
   }
-}
-
-const SpinOrForm = LoadingSpinnerDecorator(<Form />)
-
-function Form(props) {
-  return (
-    <form id="loginform" className="form">
-      <input type="text" className="input" value={props.name} onChange={props.updateName} name="username" placeholder="username" />
-      <input type="password" className="input" value={props.password} onChange={props.updatePassword} name="password" placeholder="password"/>
-      <input type="submit" className="button" onClick={props.sendLogin} action="submit" value ="Login"/>
-    </form>
-  )
 }
 
 export default LoginForm
