@@ -45,6 +45,9 @@ class LoginForm extends Component {
       email: this.state.name,
       password: this.state.password
     }
+
+    this.setState({email:"", password: ""})
+
     axios.post('/api/user', data)
       .then(res => {
         // if the response we get is a succcess that means theyre logged in, then we redirect them
