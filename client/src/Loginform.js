@@ -61,7 +61,7 @@ class LoginForm extends Component {
     // kind of ugly hack
 
     return (
-      this.state.loading ? (
+      this.state.redirect ? <Redirect to="/dashboard" /> : this.state.loading ? (
         <Spinner className="spinner"
                  fadeIn="none"
                  name='ball-spin-fade-loader' />
