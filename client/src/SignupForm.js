@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import './styles/signupform.css'
 
 class SignupForm extends Component {
@@ -31,6 +32,15 @@ class SignupForm extends Component {
 
   sendRegistration(e) {
     e.preventDefault()
+    const data = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password
+    }
+    axios.post('/api/user/create', data)
+      .then(res => console.log(res))
+
   }
 
   render () {
