@@ -43,14 +43,4 @@ module.exports = function(router, passport) {
         return done(err, null, null);
       });
     })
-
-    // Update a user
-    .put(function(req, res) {
-
-    })
-
-    // Delete a user
-    .delete(function(req, res) {
-
-    })
 }

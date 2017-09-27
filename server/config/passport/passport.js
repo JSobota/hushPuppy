@@ -19,20 +19,20 @@ module.exports = function(passport, user) {
           email: email
         }
       }).then(function(user) {
+        // User already exists in the database
         if (user) {
           return done(null, false, {
-            message: "That email is already registered.",
-            loginMessage: req.flash('loginMessage', 'That email is already registered')
+            msg: "That email is already registered."
           });
         } else {
           var userPassword = generateHash(password);
           var data = {
             email: email,
-            password: userPassword,
-            firstname: req.body.firstName,
-            lastname: req.body.lastName,
-            status: req.body.contractor,
-            company: req.body.company
+            password: userPassword
+            // firstname: req.body.firstName,
+            // lastname: req.body.lastName,
+            // status: req.body.contractor,
+            // company: req.body.company
           };
 
           User.create(data).then(function(newUser, created) {
@@ -69,13 +69,13 @@ module.exports = function(passport, user) {
       }).then(function(user) {
         if (!user) {
           return done(false, false,  {
-            message : 'Failure'
+            msg : 'Failure'
           })
         }
 
         if (!isValidPassword(user.password, password)) {
           return done(false, false,  {
-            message : 'Failure'
+            msg : 'Failure'
           })
         }
 
