@@ -51,33 +51,30 @@ describe('Rendering' , () => {
 
 
 describe('Input', () => {
-  // it('should change state when you type a name', () => {
-  //   const component = mount(<LoginForm />)
-  //   component.setState({loading: false})
-  //   const nameInput = component.find('input[type="text"]')
-  //   nameInput.get(0).value = 'Cool!'
-  //   component.update()
-  //   nameInput.simulate('change', nameInput)
-  //   expect(component.state('name')).toBe("Cool!")
-  // })
+  it('should change state when you type a name', () => {
+    const component = mount(<LoginForm />)
+    component.setState({loading: false})
+    const nameInput = component.find('input[type="text"]')
+    nameInput.get(0).value = 'Cool!'
+    nameInput.simulate('change', nameInput)
+    expect(component.state('name')).toBe("Cool!")
+  })
 
-  // it('should change state when you type a password', () => {
-  //   const component = mount(<LoginForm />)
-  //   component.setState({loading: false,
-  //                      })
-  //   const passInput = component.find('input[type="password"]')
-  //   passInput.get(0).value = "hunter2"
-  //   passInput.simulate('change', passInput)
-  //   expect(component.state('password')).toBe('hunter2')
-  // })
+  it('should change state when you type a password', () => {
+    const component = mount(<LoginForm />)
+    component.setState({loading: false,
+                       })
+    const passInput = component.find('input[type="password"]')
+    passInput.get(0).value = "hunter2"
+    passInput.simulate('change', passInput)
+    expect(component.state('password')).toBe('hunter2')
+  })
 })
 
-describe('Submit', () => {
-  //   const component = mount(<LoginForm />)
-  //   const button = component.find('#loginform > input[type="submit"]')
-  //   component.instance().sendLogin = jest.fn()
-  //   component.update()
-  //   console.log(button)
-  //   button.simulate('click')
-  //   expect(component.instance().sendLogin).toHaveBeenCalledTimes(1)
+describe.skip('Submit', () => {
+  const component = mount(<LoginForm />)
+  const button = component.find('input[type="submit"]')
+  component.instance().sendLogin = jest.fn()
+  component.simulate('click', button)
+  expect(component.instance().sendLogin).toHaveBeenCalledTimes(1)
 })
