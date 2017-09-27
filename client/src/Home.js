@@ -1,13 +1,17 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router-dom'
 import './styles/home.css'
 
-function Home () {
+function Home() {
   return (
     <div className="home">
-      <Link to="/login" className="button hvr-grow-shadow">Login</Link>
+      <Link to="/login" className="button hvr-grow-shadow">
+        Login
+      </Link>
       <p> or </p>
-      <Link to="/signup" className="button hvr-grow-shadow">Signup</Link>
+      <Link to="/signup" className="button hvr-grow-shadow">
+        Signup
+      </Link>
     </div>
   )
 }

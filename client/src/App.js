@@ -1,6 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router,
-         Route } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Navbar from './Navbar'
 import LoginForm from './Loginform'
 import SignupForm from './SignupForm'
@@ -9,7 +8,7 @@ import Dashboard from './Dashboard'
 import CreateForm from './CreateForm'
 import Logout from './Logout'
 
-function Routes () {
+function Routes() {
   return (
     <Router>
       <div>
@@ -26,8 +25,8 @@ function Routes () {
   )
 }
 
-function App () {
-  return ( <Routes /> )
+function App() {
+  return <Routes />
 }
 
-export default App;
+export default App

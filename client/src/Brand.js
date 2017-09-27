@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router-dom'
 import './styles/brand.css'
-import logo from "./img/hushPuppy_Logo.png"
+import logo from './img/hushPuppy_Logo.png'
 
-function Brand () {
+function Brand() {
   return (
     <div className="brand">
       <Link to="/">
-        <img className="logo" alt="logo" src={logo}/>
+        <img className="logo" alt="logo" src={logo} />
       </Link>
     </div>
   )

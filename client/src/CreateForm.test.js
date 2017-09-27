@@ -6,12 +6,12 @@ import helper from './test-helpers'
 describe.skip('Initial State.', () => {
   it('has an empty group name', () => {
     const component = shallow(<CreateForm />)
-    expect(component.state('groupName')).toBe("")
+    expect(component.state('groupName')).toBe('')
   })
 
   it('has an empty ending date', () => {
     const component = shallow(<CreateForm />)
-    expect(component.state('endDate')).toBe("")
+    expect(component.state('endDate')).toBe('')
   })
 })
 
