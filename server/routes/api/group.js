@@ -11,7 +11,7 @@ module.exports = function(router) {
         })
         .then(newGroup => {
           // This needs to be switched to user.id
-          newGroup.addUser(req.body.id);
+          newGroup.addUser(req.user.id);
           res.status(201).json(newGroup);
         })
         .catch(error => { res.status(400).send(error) });
@@ -23,7 +23,7 @@ module.exports = function(router) {
     }
     res.status(401).send({msg: 'Unauthorized'})
   })
-  
+
   router.route('/group/join')
     .post(function(req, res) {
       Group.findOne({

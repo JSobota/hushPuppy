@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme'
 import CreateForm from './CreateForm'
 import helper from './test-helpers'
 
-describe('Initial State.', () => {
+describe.skip('Initial State.', () => {
   it('has an empty group name', () => {
     const component = shallow(<CreateForm />)
     expect(component.state('groupName')).toBe("")
@@ -15,7 +15,7 @@ describe('Initial State.', () => {
   })
 })
 
-describe('Rendering', () => {
+describe.skip('Rendering', () => {
   it('has two text inputs', () => {
     const component = shallow(<CreateForm />)
     expect(component.find('input[type="text"]').length).toBe(2)
@@ -35,7 +35,7 @@ describe('Input', () => {
     expect(component.state('groupName')).toBe('Group Name')
   })
 
-  it('typing an end date updates state', () => {
+  it.skip('typing an end date updates state', () => {
     const component = mount(<CreateForm />)
     const endDateInput = component.find('input[name="endDate"]')
     helper.typeIn(endDateInput, '01/22/17')
