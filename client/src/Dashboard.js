@@ -3,6 +3,10 @@ import GroupDisplay from './GroupDisplay'
 import CreateForm from './CreateForm'
 import './styles/dashboard.css'
 
+// TODO: get user's groups if they're in one and display them
+
+// TODO: change all instances of "search" to "join" to reflect what it
+// actually does. its mostly css classes
 class Dashboard extends Component {
   constructor(props) {
     super(props)
@@ -46,7 +50,7 @@ class Dashboard extends Component {
             onChange={this.handleSearchChange.bind(this)}
             type="text"
             name="search"
-            placeholder="Search..."
+            placeholder="Join a group..."
           />
           <input
             id="searchButton"
