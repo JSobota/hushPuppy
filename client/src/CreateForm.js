@@ -5,8 +5,8 @@ class CreateForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      groupName: ''
-      //endDate: "",
+      groupName: '',
+      inviteCode: ''
     }
   }
 
@@ -14,9 +14,9 @@ class CreateForm extends Component {
     this.setState({ groupName: e.target.value })
   }
 
-  // updateEndDate (e) {
-  //   this.setState({endDate: e.target.value})
-  // }
+  updateInviteCode(e) {
+    this.setState({ inviteCode: e.target.value })
+  }
 
   createEvent(e) {
     e.preventDefault()
@@ -44,12 +44,14 @@ class CreateForm extends Component {
           placeholder="Group Name"
         />
 
-        {/*<input value={this.state.endDate}
-               onChange={this.updateEndDate.bind(this)}
-               type="text"
-               className="input"
-               name="endDate"
-               placeholder="End Date" />*/}
+        <input
+          value={this.state.inviteCode}
+          onChange={this.updateInviteCode.bind(this)}
+          type="text"
+          className="input"
+          name="inviteCode"
+          placeholder="Invite code..."
+        />
 
         <input
           type="submit"

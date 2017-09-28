@@ -3,19 +3,19 @@ import { shallow, mount } from 'enzyme'
 import CreateForm from './CreateForm'
 import helper from './test-helpers'
 
-describe.skip('Initial State.', () => {
+describe('Initial State.', () => {
   it('has an empty group name', () => {
     const component = shallow(<CreateForm />)
     expect(component.state('groupName')).toBe('')
   })
 
-  it('has an empty ending date', () => {
-    const component = shallow(<CreateForm />)
-    expect(component.state('endDate')).toBe('')
+  it('has an empty invite code', () => {
+    const component = mount(<CreateForm />)
+    expect(component.state('inviteCode')).toBe('')
   })
 })
 
-describe.skip('Rendering', () => {
+describe('Rendering', () => {
   it('has two text inputs', () => {
     const component = shallow(<CreateForm />)
     expect(component.find('input[type="text"]').length).toBe(2)
@@ -35,11 +35,11 @@ describe('Input', () => {
     expect(component.state('groupName')).toBe('Group Name')
   })
 
-  it.skip('typing an end date updates state', () => {
+  it('typing an invite code updates state', () => {
     const component = mount(<CreateForm />)
-    const endDateInput = component.find('input[name="endDate"]')
-    helper.typeIn(endDateInput, '01/22/17')
-    expect(component.state('endDate')).toBe('01/22/17')
+    const endDateInput = component.find('input[name="inviteCode"]')
+    helper.typeIn(endDateInput, 'AAA-BBB-123')
+    expect(component.state('inviteCode')).toBe('AAA-BBB-123')
   })
 
   it('fires right callback when clicked', () => {
