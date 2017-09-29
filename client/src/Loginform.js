@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Spinner from 'react-spinkit'
 import { Redirect } from 'react-router-dom'
+import WithLoadingSpinner from './WithLoadingSpinner'
 import './styles/loginform.css'
 import './styles/spinner.css'
 
@@ -33,21 +34,12 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <LoadingSpinner
-        loading={this.state.loading}
-        showWhenDone={<Form />}
-        />
+      <FormWithSpinner loading={this.state.loading} />
     )
   }
 }
 
-function LoadingSpinner(props) {
-  return props.loading ? (
-    <Spinner name="ball-spin-fade-loader" fadeIn="none" className="spinner" />
-  ) : (
-    props.showWhenDone
-  )
-}
+const FormWithSpinner = WithLoadingSpinner(() => (<Form />))
 
 class Form extends Component {
   constructor(props) {
