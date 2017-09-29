@@ -21,7 +21,8 @@ class CreateForm extends Component {
   createEvent(e) {
     e.preventDefault()
     const data = {
-      name: this.state.groupName
+      name: this.state.groupName,
+      inviteCode: this.state.inviteCode
     }
     axios.post('/api/group', data).then(res => console.log(res))
     //const payload = {...this.state}

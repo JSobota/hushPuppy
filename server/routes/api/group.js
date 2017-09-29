@@ -6,13 +6,14 @@ module.exports = function(router) {
   router.route('/group')
     // Create a group
     .post(function(req, res) {
+      console.log(req.body.inviteCode)
       Group.create({
           name: req.body.name,
           inviteCode: req.body.inviteCode
         })
         .then(newGroup => {
           // This needs to be switched to user.id
-          newGroup.addUser(req.body.id,{ through: { role: 'admin' }});
+          newGroup.addUser(req.user.id,{ through: { role: 'admin' }});
           res.status(201).json(newGroup);
         })
         .catch(error => { res.status(400).send(error) });
@@ -38,6 +39,8 @@ module.exports = function(router) {
   // Requires a inviteCode that is a string, and for a user to be logged in
   router.route('/group/join')
     .post(function(req, res) {
+      console.log('ffffffffffffffffffffffffff')
+      console.log(req.body.inviteCode)
       Group.findOne({
           where: {
             inviteCode: req.body.inviteCode
@@ -48,8 +51,9 @@ module.exports = function(router) {
             res.status(400).send({ msg: 'No group was found.' });
           }
           // This needs to be switched to user.id
-          result.addUser(req.body.id);
-          res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
+          result.addUser(req.body.id).then( () => {
+            res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
+          })
         })
         .catch(error => {
           res.status(400).send(error);
@@ -70,7 +74,7 @@ module.exports = function(router) {
         if (!group) {
           res.status(200).send({success: false, msg: 'No group found'});
         }
-        
+
       })
       .catch(error => {
         restatus(400).send(error);
