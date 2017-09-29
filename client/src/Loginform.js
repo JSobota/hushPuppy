@@ -21,9 +21,9 @@ class LoginForm extends Component {
     axios.get('/api/auth-check').then(res => {
       // 200 status code means we're logged in
       if (res.status === 200) {
-        this.setState({loggedIn: true })
+        this.setState({ loggedIn: true })
       } else {
-        this.setState({loggedIn: false })
+        this.setState({ loggedIn: false })
       }
     })
   }
