@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import GroupDisplay from './GroupDisplay'
 import CreateForm from './CreateForm'
+import axios from 'axios'
 import './styles/dashboard.css'
 
 // TODO: get user's groups if they're in one and display them
@@ -15,18 +17,32 @@ class Dashboard extends Component {
       groups: [],
       showCreateForm: false,
       //TODO: chnge me
-      loggedIn: true
+      loggedIn: false
     }
+  }
+
+  loginCheck(loginStateFlag) {
+    axios.get('/api/auth-check').then(res => {
+      // 200 status code means we're logged in
+      if (res.status === 200) {
+        this.setState({loggedIn: true })
+      } else {
+        this.setState({loggedIn: false })
+      }
+    })
+  }
+
+  componentDidMount() {
+    this.loginCheck('loggedIn')
   }
 
   search(e) {
     e.preventDefault()
-    //const payload = {...this.state}
-    /*
-      ajax.post(/api/login-thing, payload)
-      .then(...)
-      .catch(...)
-    */
+    const data = {
+      inviteCode: this.state.id
+    }
+    axios.post('/api/group/join', data)
+      .then(res => console.log(res))
   }
 
   createGroup(e) {
@@ -42,6 +58,10 @@ class Dashboard extends Component {
   }
 
   render() {
+    if (!this.state.loggedIn) {
+      return (<Redirect to="/login" />)
+    }
+
     if (this.state.loggedIn) {
       return (
         <div id="dashboard" className="dashboard">
@@ -54,7 +74,7 @@ class Dashboard extends Component {
               type="text"
               name="search"
               placeholder="Join a group..."
-            />
+              />
             <input
               id="searchButton"
               type="submit"
@@ -62,7 +82,7 @@ class Dashboard extends Component {
               onClick={this.search.bind(this)}
               action="submit"
               value=""
-            />
+              />
           </div>
           <h2>or</h2>
           {this.state.showCreateForm ? (
@@ -79,6 +99,7 @@ class Dashboard extends Component {
         </div>
       )
     }
+
   }
 }
 
