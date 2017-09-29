@@ -41,7 +41,7 @@ module.exports = function(router, passport) {
         if (!user) {
           res.status(400).send(Object.assign(info, { success: false }));
         } else {
-          res.send({ success: true});
+          res.send({ success: true });
         }
       })(req, res, next);
     })
@@ -69,23 +69,31 @@ module.exports = function(router, passport) {
   router.route('/user/:id')
     // Get details for a specific user ID
     .get(function(req, res) {
-      User.findOne({
-          where: {
-            id: req.params.id
-          }
-        })
-        .then(function(user) {
-          if (!user) {
-            return res.json({ status: false })
-          }
-          ////// here is where you would grab groups
-          //delete user.id
-          res.json(user);
-        })
-        .catch(function(err) {
-          console.log("Error: ", err);
-          return done(err, null, null);
-        });
+      User.findById(req.params.id).then(user => {
+        if (user) {
+          user.getGroups().then(groups => {
+            user = JSON.parse(JSON.stringify(user));
+            res.status(200).send(Object.assign(user, { memberships: groups }))
+          })
+        }
+      })
+      // User.findOne({
+      //     where: {
+      //       id: req.params.id
+      //     }
+      //   })
+      //   .then(function(user) {
+      //     if (!user) {
+      //       return res.json({ status: false })
+      //     }
+      //     ////// here is where you would grab groups
+      //     //delete user.id
+      //     res.json(user);
+      //   })
+      //   .catch(function(err) {
+      //     console.log("Error: ", err);
+      //     return done(err, null, null);
+      //   });
     })
 
     // Update a user
