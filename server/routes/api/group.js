@@ -39,8 +39,6 @@ module.exports = function(router) {
   // Requires a inviteCode that is a string, and for a user to be logged in
   router.route('/group/join')
     .post(function(req, res) {
-      console.log('ffffffffffffffffffffffffff')
-      console.log(req.body.inviteCode)
       Group.findOne({
           where: {
             inviteCode: req.body.inviteCode
@@ -56,9 +54,8 @@ module.exports = function(router) {
             res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
           })
           //
-          result.addUser(req.body.id);
+          result.addUser(req.user.id);
           res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
->>>>>>> 1703fe520456547509a6b1fa2ff94c007147b40d
         })
         .catch(error => {
           res.status(400).send(error);
@@ -89,6 +86,4 @@ module.exports = function(router) {
         restatus(400).send(error);
       })
     })
-
-
 }
