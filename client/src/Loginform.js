@@ -9,15 +9,13 @@ class LoginForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      password: '',
       redirect: false,
       loggedIn: false,
       loading: true
     }
   }
 
-  loginCheck(loginStateFlag) {
+  loginCheck() {
     axios.get('/api/auth-check').then(res => {
       // 200 status code means we're logged in
       if (res.status === 200) {
@@ -26,11 +24,55 @@ class LoginForm extends Component {
         this.setState({ loggedIn: false })
       }
     })
+    this.setState({ loading: false })
   }
 
   componentDidMount() {
-    this.loginCheck('loggedIn')
-    this.setState({ loading: false })
+    this.loginCheck()
+  }
+
+  render() {
+    return (
+      <LoadingSpinner
+        loading={this.state.loading}
+        showWhenDone={<Form />}
+        />
+    )
+  }
+}
+
+function LoadingSpinner(props) {
+  return props.loading ? (
+    <Spinner name="ball-spin-fade-loader" fadeIn="none" className="spinner" />
+  ) : (
+    props.showWhenDone
+  )
+}
+
+class Form extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      password: ''
+    }
+  }
+
+  sendLogin(e) {
+    e.preventDefault()
+    const data = {
+      email: this.state.name,
+      password: this.state.password
+    }
+
+    axios
+      .post('/api/user', data)
+      .then(res => {
+        if (res.data.success) {
+          this.setState({ redirect: true })
+        }
+      })
+      .catch(err => console.log(err))
   }
 
   updateName(e) {
@@ -41,35 +83,8 @@ class LoginForm extends Component {
     this.setState({ password: e.target.value })
   }
 
-  sendLogin(e) {
-    e.preventDefault()
-    const data = {
-      email: this.state.name,
-      password: this.state.password
-    }
-
-    this.setState({ email: '', password: '' })
-
-    axios
-      .post('/api/user', data)
-      .then(res => {
-        // if the response we get is a succcess that means theyre logged in, then we redirect them
-        // to the dashboard
-        if (res.data.success) {
-          this.setState({ redirect: true })
-        }
-      })
-      .catch(err => console.log(err))
-  }
-
   render() {
-    return this.state.redirect ? (
-      <Redirect to="/dashboard" />
-    ) : this.state.loading ? (
-      <Spinner className="spinner" fadeIn="none" name="ball-spin-fade-loader" />
-    ) : this.state.loggedIn ? (
-      <LoggedIn />
-    ) : (
+    return (
       <form id="loginform" className="form">
         <input
           type="text"
@@ -99,8 +114,8 @@ class LoginForm extends Component {
   }
 }
 
-function LoggedIn(props) {
-  return <span>You're already logged in</span>
+function AlreadyLoggedIn(props) {
+  return <div> You are already logged in </div>
 }
 
 export default LoginForm
