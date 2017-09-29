@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Spinner from 'react-spinkit'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import WithLoadingSpinner from './WithLoadingSpinner'
 import './styles/loginform.css'
-import './styles/spinner.css'
 
 class LoginForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      redirect: false,
       loggedIn: false,
       loading: true
     }
@@ -21,8 +18,6 @@ class LoginForm extends Component {
       // 200 status code means we're logged in
       if (res.status === 200) {
         this.setState({ loggedIn: true })
-      } else {
-        this.setState({ loggedIn: false })
       }
     })
     this.setState({ loading: false })
@@ -39,14 +34,14 @@ class LoginForm extends Component {
   }
 }
 
-const FormWithSpinner = WithLoadingSpinner(() => (<Form />))
+const FormWithSpinner = WithLoadingSpinner(() => (<FormWithRedirect />))
 
 class Form extends Component {
   constructor(props) {
     super(props)
     this.state = {
       name: '',
-      password: ''
+      password: '',
     }
   }
 
@@ -61,7 +56,7 @@ class Form extends Component {
       .post('/api/user', data)
       .then(res => {
         if (res.data.success) {
-          this.setState({ redirect: true })
+          this.props.redirectWhenLoggingIn()
         }
       })
       .catch(err => console.log(err))
@@ -85,7 +80,7 @@ class Form extends Component {
           onChange={this.updateName.bind(this)}
           name="username"
           placeholder="username"
-        />
+          />
         <input
           type="password"
           className="input"
@@ -93,18 +88,29 @@ class Form extends Component {
           onChange={this.updatePassword.bind(this)}
           name="password"
           placeholder="password"
-        />
+          />
         <input
           type="submit"
           className="button"
           onClick={this.sendLogin.bind(this)}
           action="submit"
           value="Login"
-        />
+          />
       </form>
     )
   }
 }
+
+const FormWithRedirect = withRouter(
+  ({history}) => {
+    return (
+      <Form
+        redirectWhenLoggingIn={() => {
+          history.push('/dashboard')
+        }} />
+    )
+  }
+)
 
 function AlreadyLoggedIn(props) {
   return <div> You are already logged in </div>
