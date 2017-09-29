@@ -11,7 +11,7 @@ module.exports = function(router) {
           inviteCode: req.body.inviteCode
         })
         .then(newGroup => {
-          // This needs to be switched to user.id
+          // This needs to be switched to req.user.id
           newGroup.addUser(req.body.id,{ through: { role: 'admin' }});
           res.status(201).json(newGroup);
         })
@@ -47,7 +47,12 @@ module.exports = function(router) {
           if (!result) {
             res.status(400).send({ msg: 'No group was found.' });
           }
-          // This needs to be switched to user.id
+          // This needs to be switched to req.user.id
+          // 
+          result.addUser(req.body.id).then( () => {
+            res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
+          }) 
+          // 
           result.addUser(req.body.id);
           res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
         })
@@ -63,8 +68,12 @@ module.exports = function(router) {
       Group.findById(req.params.id).then(group => {
         if (group) {
           group.getUsers({attributes: ['id', 'firstname', 'lastname', 'email'] }).then(members => {
-            // res.status(200).send( (Object.assign(group, {people: members})) );
-            res.status(200).send( members );
+            // group.people = members;
+            console.log(group);
+            group = JSON.parse(JSON.stringify(group));
+
+            res.status(200).send( (Object.assign(group, {members: members})) );
+            // res.status(200).send( {...group, members: members} );
           })
         }
         if (!group) {
