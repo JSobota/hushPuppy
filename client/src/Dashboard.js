@@ -56,7 +56,10 @@ class Dashboard extends Component {
     const data = {
       inviteCode: this.state.id
     }
-    axios.post('/api/group/join', data).then(res => console.log(res))
+    axios.post('/api/group/join', data)
+      .then(res => {this.setState({id: ""})})
+    //lets run login check to get their new groups
+      .then(() =>  this.loginCheck() )
   }
 
   createGroup(e) {
