@@ -51,12 +51,8 @@ module.exports = function(router) {
             res.status(400).send({ msg: 'No group was found.' });
           }
           // This needs to be switched to req.user.id
-<<<<<<< HEAD
           //
           result.addUser(req.user.id).then(() => {
-=======
-          result.addUser(req.body.id).then(() => {
->>>>>>> dan
             res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
           })
         })
@@ -70,7 +66,6 @@ module.exports = function(router) {
   // Get a list of all memebers, message, and end date
     .get(function(req, res) {
       Group.findById(req.params.id).then(group => {
-<<<<<<< HEAD
         if (group) {
           group.getUsers({ attributes: ['id', 'firstname', 'lastname', 'email'] }).then(members => {
             // group.people = members;
@@ -83,22 +78,6 @@ module.exports = function(router) {
               }
             }).then(messages => {
               res.status(200).send((Object.assign(group, { messages: messages })));
-=======
-          if (group) {
-            group.getUsers({ attributes: ['id', 'firstname', 'lastname', 'email'] }).then(members => {
-              // group.people = members;
-              console.log(group);
-              group = JSON.parse(JSON.stringify(group));
-              Object.assign(group, { members: members });
-              Message.findAll({
-                where: {
-                  GroupId: req.params.id
-                }
-              }).then(messages => {
-                res.status(200).send((Object.assign(group, { messages: messages })));
-              })
-              // res.status(200).send((Object.assign(group, { members: members })));
->>>>>>> dan
             })
 
             // res.status(200).send((Object.assign(group, { members: members })));
