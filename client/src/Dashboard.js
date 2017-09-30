@@ -28,8 +28,19 @@ class Dashboard extends Component {
         this.setState({ loggedIn: true })
         const id = res.data.id
         console.log(`/api/user/${id}`)
-        axios.get(`/api/user/${id}`)
-          .then(res => console.log(res))
+        axios
+          .get(`/api/user/${id}`)
+          .then(res => {
+            const groups = res.data.memberships.map(group => ({
+              id: group.id,
+              name: group.name,
+              endDate: group.endDate
+            }))
+
+            this.setState({ groups })
+
+            console.log(groups)
+          })
           .catch(err => console.log(err))
       } else {
         this.setState({ loggedIn: false })
