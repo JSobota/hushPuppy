@@ -33,7 +33,7 @@ class Dashboard extends Component {
           .then(res => {
             const groups = res.data.memberships.map(group => ({
               id: group.id,
-              name: group.name,
+              name: group.name
             }))
 
             this.setState({ groups })
@@ -56,10 +56,13 @@ class Dashboard extends Component {
     const data = {
       inviteCode: this.state.id
     }
-    axios.post('/api/group/join', data)
-      .then(res => {this.setState({id: ""})})
-    //lets run login check to get their new groups
-      .then(() =>  this.loginCheck() )
+    axios
+      .post('/api/group/join', data)
+      .then(res => {
+        this.setState({ id: '' })
+      })
+      //lets run login check to get their new groups
+      .then(() => this.loginCheck())
   }
 
   createGroup(e) {

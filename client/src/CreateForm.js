@@ -24,20 +24,22 @@ class CreateForm extends Component {
       name: this.state.groupName,
       inviteCode: this.state.inviteCode
     }
-    axios.post('/api/group', data).then(res => console.log(res))
-    //const payload = {...this.state}
-    /*
-      ajax.post(/api/login-thing, payload)
-      .then(...)
-      .catch(...)
-    */
+    axios
+      .post('/api/group', data)
+      .then(res => console.log(res))
+      .then(() => {
+        this.setState({
+          groupName: '',
+          inviteCode: ''
+        })
+      })
   }
 
   render() {
     return (
       <form id="createGroupform" className="form">
         <input
-          value={this.state.goupName}
+          value={this.state.groupName}
           onChange={this.updateGroupName.bind(this)}
           type="text"
           className="input"
