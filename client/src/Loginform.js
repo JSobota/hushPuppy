@@ -28,20 +28,18 @@ class LoginForm extends Component {
   }
 
   render() {
-    return (
-      <FormWithSpinner loading={this.state.loading} />
-    )
+    return <FormWithSpinner loading={this.state.loading} />
   }
 }
 
-const FormWithSpinner = WithLoadingSpinner(() => (<FormWithRedirect />))
+const FormWithSpinner = WithLoadingSpinner(() => <FormWithRedirect />)
 
 class Form extends Component {
   constructor(props) {
     super(props)
     this.state = {
       name: '',
-      password: '',
+      password: ''
     }
   }
 
@@ -80,7 +78,7 @@ class Form extends Component {
           onChange={this.updateName.bind(this)}
           name="username"
           placeholder="username"
-          />
+        />
         <input
           type="password"
           className="input"
@@ -88,29 +86,28 @@ class Form extends Component {
           onChange={this.updatePassword.bind(this)}
           name="password"
           placeholder="password"
-          />
+        />
         <input
           type="submit"
           className="button"
           onClick={this.sendLogin.bind(this)}
           action="submit"
           value="Login"
-          />
+        />
       </form>
     )
   }
 }
 
-const FormWithRedirect = withRouter(
-  ({history}) => {
-    return (
-      <Form
-        redirectWhenLoggingIn={() => {
-          history.push('/dashboard')
-        }} />
-    )
-  }
-)
+const FormWithRedirect = withRouter(({ history }) => {
+  return (
+    <Form
+      redirectWhenLoggingIn={() => {
+        history.push('/dashboard')
+      }}
+    />
+  )
+})
 
 function AlreadyLoggedIn(props) {
   return <div> You are already logged in </div>

@@ -68,7 +68,7 @@ class Dashboard extends Component {
             type="text"
             name="search"
             placeholder="Join a group..."
-            />
+          />
           <input
             id="searchButton"
             type="submit"
@@ -76,7 +76,7 @@ class Dashboard extends Component {
             onClick={this.search.bind(this)}
             action="submit"
             value=""
-            />
+          />
         </div>
         <h2>or</h2>
         {this.state.showCreateForm ? (
