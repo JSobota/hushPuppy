@@ -14,6 +14,10 @@ module.exports = function(sequelize, Sequelize) {
     endDate: {
       type: Sequelize.DATE
     },
+    isMatched: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    }
   });
 
   Group.associate = function(models) {
