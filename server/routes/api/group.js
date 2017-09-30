@@ -52,12 +52,9 @@ module.exports = function(router) {
           }
           // This needs to be switched to req.user.id
           //
-          result.addUser(req.body.id).then(() => {
+          result.addUser(req.user.id).then(() => {
             res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
           })
-          //
-          result.addUser(req.body.id);
-          res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
         })
         .catch(error => {
           res.status(400).send(error);

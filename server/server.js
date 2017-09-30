@@ -48,6 +48,6 @@ app.use(function(req, res, next) {
 
 module.exports = app;
 
-models.sequelize.sync({ force: false }).then(function() {
+models.sequelize.sync({ force: false}).then(function() {
   app.listen(PORT, () => console.log('running'));
 });
