@@ -65,6 +65,13 @@ module.exports = function(router, passport) {
       }
     })
 
+  // router.use(function(req, res, next) {
+  //   if (req.isAuthenticated()) {
+  //     next();
+  //   }
+  //   res.status(401).send({msg: 'Unauthorized'})
+  // })
+
   // Routes for /api/user/:id
   router.route('/user/:id')
     // Get details for a specific user ID
@@ -72,8 +79,12 @@ module.exports = function(router, passport) {
       User.findById(req.params.id).then(user => {
         if (user) {
           user.getGroups().then(groups => {
-            user = JSON.parse(JSON.stringify(user));
-            res.status(200).send(Object.assign(user, { memberships: groups }))
+            if (!groups) {
+              res.status(200).send(success: false, msg: 'No groups found for user!');
+            } else {
+              user = JSON.parse(JSON.stringify(user));
+              res.status(200).send(Object.assign(user, { memberships: groups }))
+            }
           })
         }
       })
