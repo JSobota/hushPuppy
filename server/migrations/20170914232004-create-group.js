@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.STRING,
         notEmpty: true
       },
+      isMatched: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       endDate: {
         type: Sequelize.DATE
       },

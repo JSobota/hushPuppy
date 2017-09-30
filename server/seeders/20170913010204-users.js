@@ -28,8 +28,17 @@ for (var i = 0; i < 50; i++) {
       updatedAt: new Date()
     }
   }
-
 }
+
+// var groupData = [];
+// for (var i = 0; i < 10; i++) {
+//   groupData[i] = {
+//     name: 'Company' + i,
+//     inviteCode: 'joinMe' + i,
+//     createdAt: new Date(),
+//     updatedAt: new Date()
+//   }
+// }
 module.exports = {
   up: function(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Users', userData)
