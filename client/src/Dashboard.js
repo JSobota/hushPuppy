@@ -26,6 +26,9 @@ class Dashboard extends Component {
       // 200 status code means we're logged in
       if (res.status === 200) {
         this.setState({ loggedIn: true })
+        const id = res.data.id
+        axios.get(`/api/user/${id}`)
+          .then(res => console.log(res))
       } else {
         this.setState({ loggedIn: false })
       }
