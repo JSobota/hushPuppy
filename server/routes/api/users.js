@@ -79,7 +79,6 @@ module.exports = function(router, passport) {
       User.findById(req.params.id).then(user => {
         if (user) {
           user.getGroups().then(groups => {
-            console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ' + groups )
             if (groups.length === 0) {
               res.status(200).send({success: false, msg: 'No groups found for user'});
             } else {
