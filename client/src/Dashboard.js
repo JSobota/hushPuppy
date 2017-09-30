@@ -34,7 +34,6 @@ class Dashboard extends Component {
             const groups = res.data.memberships.map(group => ({
               id: group.id,
               name: group.name,
-              endDate: group.endDate
             }))
 
             this.setState({ groups })

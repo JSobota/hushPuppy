@@ -4,9 +4,8 @@ import './styles/groupdisplay.css'
 function GroupDisplay(props) {
   const groups = props.groups.map(g => (
     <li key={g.id}>
-      <span>{g.id}</span>
-      <span>{g.name}</span>
-      <span>{g.endDate}</span>
+      <span className="groupId">{g.id}</span>
+      <span className="groupName">{g.name}</span>
     </li>
   ))
   return groups.length ? (
