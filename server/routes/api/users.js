@@ -80,7 +80,7 @@ module.exports = function(router, passport) {
         if (user) {
           user.getGroups().then(groups => {
             if (!groups) {
-              res.status(200).send(success: false, msg: 'No groups found for user!');
+              res.status(200).send({success: false, msg: 'No groups found for user!'});
             } else {
               user = JSON.parse(JSON.stringify(user));
               res.status(200).send(Object.assign(user, { memberships: groups }))

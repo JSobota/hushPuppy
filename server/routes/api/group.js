@@ -50,13 +50,9 @@ module.exports = function(router) {
             res.status(400).send({ msg: 'No group was found.' });
           }
           // This needs to be switched to req.user.id
-          // 
           result.addUser(req.body.id).then(() => {
             res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
           })
-          // 
-          result.addUser(req.body.id);
-          res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
         })
         .catch(error => {
           res.status(400).send(error);
@@ -81,7 +77,6 @@ module.exports = function(router) {
               }).then(messages => {
                 res.status(200).send((Object.assign(group, { messages: messages })));
               })
-
               // res.status(200).send((Object.assign(group, { members: members })));
             })
           }
