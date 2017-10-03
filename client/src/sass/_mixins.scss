@@ -21,3 +21,7 @@
      @media (max-width: 37.5em)  { @content ; }
   }
 }
+
+@mixin borderify($color) {
+  border: 3px $color solid;
+}

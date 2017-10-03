@@ -6,6 +6,7 @@
   color: $dark-bg;
   height: auto;
   width: 320px;
+  padding: 10px;
+  @include borderify($lightgrey)
   background-color: $white;
-  background-opacity: .5;
 }
