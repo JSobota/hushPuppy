@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { elastic as Menu } from 'react-burger-menu'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 // eslint-disable-next-line
 import './styles/hamburger.css'
 

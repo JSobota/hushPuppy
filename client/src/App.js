@@ -7,6 +7,7 @@ import Home from './Home'
 import Dashboard from './Dashboard'
 import CreateForm from './CreateForm'
 import Logout from './Logout'
+import GroupPage from './GroupPage'
 
 function Routes() {
   return (
@@ -20,6 +21,7 @@ function Routes() {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/new" component={CreateForm} />
         <Route exact path="/logout" component={Logout} />
+        <Route exact path="/group/:group" component={GroupPage} />
       </div>
     </Router>
   )

@@ -4,7 +4,7 @@
 
 $dogSearchButton: './../img/hP_searchIcon.png';
 $search-bar-height: 50px;
-
+$search-button-margin: 10px;
 
 .dashboard {
   flex-basis: max-content;
@@ -30,15 +30,16 @@ $search-bar-height: 50px;
   border-radius: 5px;
   border: none;
   padding: 10px;
-  margin: 10px;
+  margin: $search-button-margin;
 }
 
 .searchBar {
-  width: 250px;
+  width: 320px - $search-bar-height + $search-button-margin/2;
   height: $search-bar-height;
   box-sizing: border-box;
   border: none;
   font-size: 2em;
+  @include borderify($lightgrey)
   &:focus {
     border-bottom: 3px $orange solid;
     outline-width: 0;
@@ -47,6 +48,6 @@ $search-bar-height: 50px;
 }
 
 #createButton {
-  margin: 0 auto; 
-  @include centerify 
+  margin: 0 auto;
+  @include centerify
 }
