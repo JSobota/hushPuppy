@@ -89,7 +89,7 @@ class Form extends Component {
         />
         <input
           type="submit"
-          className="button"
+          className="button hvr-grow"
           onClick={this.sendLogin.bind(this)}
           action="submit"
           value="Login"
