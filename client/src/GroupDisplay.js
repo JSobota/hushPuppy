@@ -1,10 +1,11 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import './styles/groupdisplay.css'
 
 function GroupDisplay(props) {
   const groups = props.groups.map(g => (
     <li key={g.id}>
-      <span className="groupName">{g.name}</span>
+      <Link className="groupName" to={`/group/${g.id}`}> {g.name} </Link>
     </li>
   ))
   return groups.length ? (
