@@ -1,11 +1,12 @@
 const models = require('../../models/');
 const User = models.User;
 const Group = models.Group;
+const Message = models.Message;
 
 module.exports = function(router, passport) {
   // Routes for /api/user
   router.route('/user')
-  // Login
+    // Login
     .post(function(req, res, next) {
       console.log(req.body);
       passport.authenticate('local-signin', function(err, user, info) {
@@ -74,18 +75,30 @@ module.exports = function(router, passport) {
 
   // Routes for /api/user/:id
   router.route('/user/:id')
-  // Get details for a specific user ID
+    // Get details for a specific user ID
     .get(function(req, res) {
-      User.findById(req.params.id).then(user => {
+      User.findOne({
+        where: {id: req.params.id},
+        attributes: ['id', 'firstname', 'lastname', 'email']
+      }).then(user => {
         if (user) {
           user.getGroups().then(groups => {
-            if (groups.length === 0) {
-              res.status(200).send({success: false, msg: 'No groups found for user'});
+            if (!groups) {
+              res.status(200).send({ success: false, msg: 'No groups found for user!' });
             } else {
               user = JSON.parse(JSON.stringify(user));
-              res.status(200).send(Object.assign(user, { memberships: groups }))
+              Object.assign(user, { memberships: groups })
+              Message.findAll({
+                where: {
+                  UserId: user.id
+                }
+              }).then(messages => {
+                res.status(200).send((Object.assign(user, { messages: messages })));
+              })
             }
           })
+        } else {
+          res.status(400).send({ success: false, msg: 'No user found!' })
         }
       })
     })

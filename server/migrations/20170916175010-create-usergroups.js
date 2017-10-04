@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('usergroups', {
+    return queryInterface.createTable('UserGroups', {
       GroupId: {
         type: Sequelize.INTEGER,
         references: { model: 'Users', key: 'id' },
@@ -11,6 +11,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'Groups', key: 'id' },
         onDelete: 'CASCADE'
+      },
+      role: {
+        type: Sequelize.STRING,
+      },
+      matchId: {
+        type: Sequelize.INTEGER,
+        notEmpty: false
       },
       createdAt: {
         allowNull: false,
@@ -23,6 +30,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('usergroups');
+    return queryInterface.dropTable('UserGroups');
   }
 };
