@@ -1,0 +1,12 @@
+@import _colors.scss;
+@import _mixins.scss;
+
+.membersContainer {
+	@include centerify; 
+}
+
+.members {
+	color: $orange;
+	font-size: 16px;
+	margin: 10px 10px 10px 10px;
+}
