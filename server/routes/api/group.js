@@ -70,7 +70,7 @@ module.exports = function(router) {
           if (group) {
             group.getUsers({ attributes: ['id', 'firstname', 'lastname', 'email'] }).then(members => {
               // group.people = members;
-              console.log(group);
+              // console.log(group);
               group = JSON.parse(JSON.stringify(group));
               Object.assign(group, { members: members });
               Message.findAll({
@@ -96,10 +96,11 @@ module.exports = function(router) {
   router.route('/group/:id/message')
     // Create messages
     .post(function(req, res) {
+      console.log(req.body)
       Message.create({
-          message: req.body.message,
-          UserId: req.body.uid,
-          GroupId: req.params.id
+        message: req.body.message,
+        UserId: req.user.id,
+        GroupId: req.params.id
         })
         .then(newMessage => {
           res.status(200).send({ success: true, msg: 'Message created successfully' })
@@ -114,8 +115,8 @@ module.exports = function(router) {
       Group.findById(req.params.id).then(group => {
           if (group) {
             group.getMessages().then(messages => {
-              console.log(group);
-              console.log(messages);
+              // console.log(group);
+              // console.log(messages);
               res.status(200).send(messages);
             })
           }
