@@ -1,12 +1,23 @@
 @import '_colors';
 @import '_mixins';
 
+.wrapper {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+
 .membersContainer {
-        @include centerify;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  @include borderify($lightgrey);
+  width: 320px;
 }
 
 .members {
-        color: $orange;
-        font-size: 16px;
-        margin: 10px 10px 10px 10px;
+  @include centerify;
+  color: $orange;
+  font-size: 16px;
+  margin: 10px 10px 10px 10px;
 }

@@ -20,6 +20,10 @@ $search-bar-height: 50px;
   align-items: center;
 }
 
+input[type="text"] {
+  @include borderify($lightgrey);
+}
+
 .searchBtn {
   /* for image */
   background-image: url($dogSearchButton);
@@ -47,6 +51,6 @@ $search-bar-height: 50px;
 }
 
 #createButton {
-  margin: 0 auto; 
-  @include centerify 
+  margin: 0 auto;
+  @include centerify
 }

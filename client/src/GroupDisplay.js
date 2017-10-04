@@ -5,7 +5,7 @@ import './styles/groupdisplay.css'
 function GroupDisplay(props) {
   const groups = props.groups.map(g => (
     <li key={g.id}>
-      <Link className="groupName" to={`/group/${g.id}`}> {g.name} </Link>
+      <Link  className="hvr-grow groupName" to={`/group/${g.id}`}> {g.name} </Link>
     </li>
   ))
   return groups.length ? (

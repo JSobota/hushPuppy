@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './styles/groupPage.css'
 
 class GroupPage extends Component {
   constructor() {
@@ -41,7 +42,10 @@ class GroupPage extends Component {
 
 function MemberList(props) {
   const members = props.members.map(m => <Member key={m.id} {...m} />)
-  return <div className="membersContainer">{members}</div>
+  return (<div className="wrapper">
+          <div className="membersContainer">{members}
+          </div>
+         </div>)
 }
 
 function Member(props) {
