@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import './styles/messagedisplay.css'
 
 class MessageInput extends Component {
@@ -16,6 +17,13 @@ class MessageInput extends Component {
 
   submitMessage() {
     // TODO: make ajax request too
+    const {groupId} = this.props
+    const message = this.state.message
+    const data  = { message }
+    axios.post(`/api/group/${groupId}/message`, data)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+
     this.setState({ message: '' })
   }
 
@@ -55,7 +63,7 @@ function MessageDisplay(props) {
   return (
     <div className="messagedisplay">
       <Messages messages={props.messages} />
-      <MessageInput />
+      <MessageInput groupId={props.groupId} />
     </div>
   )
 }

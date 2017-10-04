@@ -37,10 +37,11 @@ class GroupPage extends Component {
   }
 
   render() {
+    const groupId = this.props.match.params.group
     return (
       <div>
         <MemberList members={this.state.members} />
-        <MessageDisplay messages={this.state.messages} />
+        <MessageDisplay groupId={groupId} messages={this.state.messages} />
       </div>
     )
   }
