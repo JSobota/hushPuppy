@@ -1,0 +1,33 @@
+@import '_colors';
+@import '_mixins';
+@import '_buttons';
+@import 'forms';
+
+.messagebox {
+  background-color: $white;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  @include borderify($lightgrey)
+}
+
+.messagedisplay {
+  height: 300px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  input[type="text"] {
+    @extend .input;
+    height: 35px;
+    width: 100%;
+    margin-top: 3px;
+  }
+
+  button {
+    @extend .button;
+    display: inline-block;
+    margin: 0px;
+    width: auto;
+    height: auto;
+  }
+}

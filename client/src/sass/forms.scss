@@ -14,18 +14,23 @@
 
   input[type=text],
   input[type=password] {
-    margin-top: 10px;
-    width: 250px;
+    @extend .input;
+  }
+}
 
-    border: none;
-    @include borderify($lightgrey)
 
-    height: 50px;
+.input {
+  margin-top: 10px;
+  width: 250px;
+
+  border: none;
+  @include borderify($lightgrey)
+
+  height: 50px;
+  outline: none;
+  font-size: 2em;
+  &:focus {
+    border-bottom: 3px $orange solid;
     outline: none;
-    font-size: 2em;
-    &:focus {
-      border-bottom: 3px $orange solid;
-      outline: none;
-    }
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './styles/messagedisplay.css'
 
 class MessageInput extends Component {
   constructor() {
@@ -33,8 +34,10 @@ class MessageInput extends Component {
 }
 
 function Messages(props) {
-  const messages = props.messages.map((message, idx) => <Message key={idx} {...message} />)
-  return <div> {messages} </div>
+  const messages = props.messages.map((message, idx) => (
+    <Message key={idx} {...message} />
+  ))
+  return <div className="messagebox"> {messages} </div>
 }
 
 function Message(props) {
@@ -50,7 +53,7 @@ function Message(props) {
 
 function MessageDisplay(props) {
   return (
-    <div>
+    <div className="messagedisplay">
       <Messages messages={props.messages} />
       <MessageInput />
     </div>
