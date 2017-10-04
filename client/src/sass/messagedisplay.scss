@@ -31,3 +31,11 @@
     height: auto;
   }
 }
+
+.message{
+  background-color: $white;
+}
+
+.message:nth-child(even) {
+  background-color: darken($white, 10%);
+}

@@ -44,8 +44,8 @@ function Message(props) {
   const name = `${props.firstName} ${props.lastName}`
   const message = props.message
   return (
-    <div>
-      <div> {name} </div>
+    <div className="message">
+      <div> <span>{name} says:</span> </div>
       <div> {message}</div>
     </div>
   )
