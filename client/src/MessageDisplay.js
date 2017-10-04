@@ -9,18 +9,31 @@ class MessageInput extends Component {
     }
   }
 
+  updateMessage(e) {
+    this.setState({ message: e.target.value })
+  }
+
+  submitMessage() {
+    // TODO: make ajax request too
+    this.setState({ message: '' })
+  }
+
   render() {
     return (
       <div>
-        <input type="text" />
-        <button>Submit</button>
+        <input
+          type="text"
+          value={this.state.message}
+          onChange={this.updateMessage.bind(this)}
+        />
+        <button onClick={this.submitMessage.bind(this)}>Submit</button>
       </div>
     )
   }
 }
 
 function Messages(props) {
-  const messages = props.messages.map(message => <Message {...message} />)
+  const messages = props.messages.map((message, idx) => <Message key={idx} {...message} />)
   return <div> {messages} </div>
 }
 
@@ -36,12 +49,9 @@ function Message(props) {
 }
 
 function MessageDisplay(props) {
-  const messages = [
-    { firstName: 'first', lastName: 'last', message: 'messagerino' }
-  ]
   return (
     <div>
-      <Messages messages={messages} />
+      <Messages messages={props.messages} />
       <MessageInput />
     </div>
   )
