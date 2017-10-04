@@ -24,6 +24,12 @@ class GroupPage extends Component {
   getMessages(data) {
     // filter  messages from raw data and put in state
     // TODO: fill out when messages are done
+    const messages = data.messages.map( m => ({
+      message: m.message,
+      firstName: 'FAKE FIRST!',
+      firstName: 'FAKE LAST!'
+    }))
+    this.setState({messages})
   }
 
   componentDidMount() {
@@ -32,6 +38,7 @@ class GroupPage extends Component {
       .get(`/api/group/${groupId}`)
       .then(res => {
         this.getMembers(res.data)
+        this.getMessages(res.data)
       })
       .catch(err => console.log(err))
   }
