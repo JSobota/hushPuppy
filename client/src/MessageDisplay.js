@@ -16,13 +16,10 @@ class MessageInput extends Component {
 
 class Messages extends Component {}
 
-function Message(props) {
-}
+function Message(props) {}
 
 function MessageDisplay(props) {
-  return (
-    <MessageInput />
-  )
+  return <MessageInput />
 }
 
 export default MessageDisplay

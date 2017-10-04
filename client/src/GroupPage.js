@@ -37,19 +37,17 @@ class GroupPage extends Component {
   }
 
   render() {
-    return (
-        <MemberList members={this.state.members} />
-
-    )
+    return <MemberList members={this.state.members} />
   }
 }
 
 function MemberList(props) {
   const members = props.members.map(m => <Member key={m.id} {...m} />)
-  return (<div className="wrapper">
-          <div className="membersContainer">{members}
-          </div>
-         </div>)
+  return (
+    <div className="wrapper">
+      <div className="membersContainer">{members}</div>
+    </div>
+  )
 }
 
 function Member(props) {
