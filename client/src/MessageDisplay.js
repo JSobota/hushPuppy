@@ -17,10 +17,11 @@ class MessageInput extends Component {
 
   submitMessage() {
     // TODO: make ajax request too
-    const {groupId} = this.props
+    const { groupId } = this.props
     const message = this.state.message
-    const data  = { message }
-    axios.post(`/api/group/${groupId}/message`, data)
+    const data = { message }
+    axios
+      .post(`/api/group/${groupId}/message`, data)
       .then(res => console.log(res))
       .catch(err => console.log(err))
 
@@ -53,7 +54,10 @@ function Message(props) {
   const message = props.message
   return (
     <div className="message">
-      <div> <span>{name} says:</span> </div>
+      <div>
+        {' '}
+        <span>{name} says:</span>{' '}
+      </div>
       <div> {message}</div>
     </div>
   )

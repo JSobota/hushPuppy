@@ -24,12 +24,12 @@ class GroupPage extends Component {
   getMessages(data) {
     // filter  messages from raw data and put in state
     // TODO: fill out when messages are done
-    const messages = data.messages.map( m => ({
+    const messages = data.messages.map(m => ({
       message: m.message,
       firstName: m.firstName,
       lastName: m.lastName
     }))
-    this.setState({messages})
+    this.setState({ messages })
   }
 
   componentDidMount() {
