@@ -37,7 +37,12 @@ class GroupPage extends Component {
   }
 
   render() {
-    return <MemberList members={this.state.members} />
+    return (
+      <div>
+        <MemberList members={this.state.members} />
+        <MessageDisplay />
+      </div>
+    )
   }
 }
 

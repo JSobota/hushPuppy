@@ -109,8 +109,4 @@ const FormWithRedirect = withRouter(({ history }) => {
   )
 })
 
-function AlreadyLoggedIn(props) {
-  return <div> You are already logged in </div>
-}
-
 export default LoginForm

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import GroupDisplay from './GroupDisplay'
 import CreateForm from './CreateForm'
 import axios from 'axios'
