@@ -8,10 +8,7 @@ class GroupPage extends Component {
     super()
     this.state = {
       members: [],
-      messages: [{firstName: "asdf", lastName:"Adfg",message:"Fff"},
-                 {firstName: "asdf", lastName:"Adfg",message:"Fff"},
-                 {firstName: "asdf", lastName:"Adfg",message:"Fff"},
-                 {firstName: "asdf", lastName:"Adfg",message:"Fff"},]
+      messages: []
     }
   }
 
