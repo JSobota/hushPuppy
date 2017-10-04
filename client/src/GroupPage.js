@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import MessageDisplay from './MessageDisplay.js'
 import './styles/groupPage.css'
 
 class GroupPage extends Component {
@@ -36,7 +37,10 @@ class GroupPage extends Component {
   }
 
   render() {
-    return <MemberList members={this.state.members} />
+    return (
+        <MemberList members={this.state.members} />
+
+    )
   }
 }
 
