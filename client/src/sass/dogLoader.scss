@@ -1,3 +1,10 @@
+@import '_mixins';
+@import '_buttons';
+@import '_colors';
+
+$dogLoader: './../img/hushPuppy_load.png';
+
+
 @keyframes clockwisespin {
     from {
         transform: rotate(0deg);

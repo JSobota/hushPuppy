@@ -41,12 +41,12 @@ class GroupPage extends Component {
 
 function MemberList(props) {
   const members = props.members.map(m => <Member key={m.id} {...m} />)
-  return <div>{members}</div>
+  return <div className="membersContainer">{members}</div>
 }
 
 function Member(props) {
   return (
-    <div>
+    <div className="members">
       {props.firstname} {props.lastname}
     </div>
   )
