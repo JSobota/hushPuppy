@@ -9,7 +9,8 @@ module.exports = function(sequelize, Sequelize) {
     },
     inviteCode: {
       type: Sequelize.STRING,
-      notEmpty: false
+      notEmpty: false,
+      unique: true
     },
     endDate: {
       type: Sequelize.DATE

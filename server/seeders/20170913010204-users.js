@@ -1,6 +1,8 @@
 'use strict';
-var faker = require('faker');
-var bCrypt = require('bcrypt-nodejs');
+const faker = require('faker');
+const bCrypt = require('bcrypt-nodejs');
+const Sequelize = require('sequelize')
+const models = require('../models/');
 
 var generateHash = function(password) {
   return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
@@ -50,18 +52,27 @@ for (var i = 1; i < userData.length; i++) {
   }
 }
 
-console.log(membershipData[1]);
+
 
 module.exports = {
   up: function(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Users', userData)
-      .then( () => queryInterface.bulkInsert('Groups', groupData))
-      .then( () => queryInterface.bulkInsert("UserGroups", membershipData))
+      .then(() => queryInterface.bulkInsert('Groups', groupData))
+      .then(() => {
+        models.User.findAll().then(userResults => {
+          console.log(userResults);
+          models.Group.findAll().then(groupResults => {
+            console.log(groupResults);
+          })
+        })
+        // queryInterface.bulkInsert('usergroups', membershipData) 
+      })
+
 
   },
   down: function(queryInterface, Sequelize) {
     return queryInterface.bulkDelete('Users', null, {})
-        .then(() => queryInterface.bulkDelete('Groups', null, {}))
-        .then(() => queryInterface.bulkDelete('UserGroups', null, {}))
+      .then(() => queryInterface.bulkDelete('Groups', null, {}))
+      .then(() => queryInterface.bulkDelete('UserGroups', null, {}))
   }
 };
