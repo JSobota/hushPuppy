@@ -16,7 +16,7 @@ module.exports = function(router) {
         })
         .then(newGroup => {
           // This needs to be switched to req.user.id
-          newGroup.addUser(req.body.id, { through: { role: 'admin' } });
+          newGroup.addUser(req.user.id, { through: { role: 'admin' } });
           res.status(201).json(newGroup);
         })
         .catch(error => { res.status(400).send(error) });
@@ -53,7 +53,7 @@ module.exports = function(router) {
           }
           // This needs to be switched to req.user.id
           //
-          result.addUser(req.body.id).then(() => {
+          result.addUser(req.user.id).then(() => {
             res.status(200).send({ success: true, msg: 'You have joined: ' + result.name });
           })
         })
