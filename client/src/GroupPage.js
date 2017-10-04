@@ -8,7 +8,9 @@ class GroupPage extends Component {
     super()
     this.state = {
       members: [],
-      messages: []
+      messages: [
+        { firstName: 'first', lastName: 'last', message: 'messagerino' }
+      ]
     }
   }
 
@@ -40,7 +42,7 @@ class GroupPage extends Component {
     return (
       <div>
         <MemberList members={this.state.members} />
-        <MessageDisplay />
+        <MessageDisplay messages={this.state.messages}/>
       </div>
     )
   }
