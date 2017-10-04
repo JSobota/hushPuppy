@@ -78,8 +78,20 @@ module.exports = function(router) {
                   GroupId: req.params.id
                 }
               }).then(messages => {
-                res.status(200).send((Object.assign(group, { messages: messages })));
+                messages = Promise.all(
+                  messages.map( m => User.findById(m.UserId)
+                                .then(query => ({
+                                  firstName: query.firstname,
+                                  lastName: query.lastname,
+                                  message: m.message
+                                })))
+                ).then(messagesWithNames => {
+                  res.status(200).send((Object.assign(group, { messages: messagesWithNames })));
+                } )
               })
+                // .then((messages) => {
+              // res.status(200).send((Object.assign(group, { messages: messages })));
+                // })
 
               // res.status(200).send((Object.assign(group, { members: members })));
             })
@@ -116,7 +128,7 @@ module.exports = function(router) {
           if (group) {
             group.getMessages().then(messages => {
               // console.log(group);
-              // console.log(messages);
+              console.log(messages);
               res.status(200).send(messages);
             })
           }

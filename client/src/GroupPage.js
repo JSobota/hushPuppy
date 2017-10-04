@@ -26,8 +26,8 @@ class GroupPage extends Component {
     // TODO: fill out when messages are done
     const messages = data.messages.map( m => ({
       message: m.message,
-      firstName: 'FAKE FIRST!',
-      firstName: 'FAKE LAST!'
+      firstName: m.firstName,
+      lastName: m.lastName
     }))
     this.setState({messages})
   }
