@@ -221,6 +221,25 @@ module.exports = function(router) {
       })
     })
 
+    router.route('/group/:id/isAdmin')
+      .get(function(req, res) {
+        UserGroups.findAll({
+          where: {
+            UserId: req.user.id,
+            GroupId: req.params.id,
+            role: 'admin'
+          }
+        }).then(results => {
+          console.log(results)
+          if (results.length <= 0) {
+            res.status(400).send({success: false, msg: 'Current user is not the group admin'})
+          }
+          else {
+            res.status(200).send({success: true, msg: 'Current user is the group admin'})
+          }
+        })
+      })
+
   function getAdmin(user) {
     return user.role === 'admin';
   }
