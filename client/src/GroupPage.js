@@ -10,7 +10,7 @@ class GroupPage extends Component {
     this.state = {
       members: [],
       messages: [],
-      showScramble: true
+      showScramble: false
     }
   }
 
@@ -46,6 +46,13 @@ class GroupPage extends Component {
       .then(res => {
         this.getMembers(res.data)
         this.getMessages(res.data)
+      })
+      .catch(err => console.log(err))
+
+    axios
+      .get(`/api/group/${this.groupId}/isAdmin`)
+      .then(r => {
+        this.setState({showScramble: r.data.success})
       })
       .catch(err => console.log(err))
   }
