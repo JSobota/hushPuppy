@@ -10,7 +10,7 @@ class GroupPage extends Component {
     this.state = {
       members: [],
       messages: [],
-      showScramble: false
+      showScramble: true
     }
   }
 
@@ -52,9 +52,9 @@ class GroupPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <MemberList members={this.state.members} />
-        <Scramble onClick={this.scramble}/>
+        <Scramble show={this.state.showScramble} text="Scramble!" />
         <MessageDisplay groupId={this.groupId} messages={this.state.messages} />
       </div>
     )
@@ -64,7 +64,7 @@ class GroupPage extends Component {
 function MemberList(props) {
   const members = props.members.map(m => <Member key={m.id} {...m} />)
   return (
-    <div className="wrapper">
+    <div>
       <div className="membersContainer">{members}</div>
     </div>
   )
@@ -79,9 +79,11 @@ function Member(props) {
 }
 
 function Scramble(props) {
-  return (
-      <button onClick={props.onClick}> Scramble </button>
-  )
+  return props.show ? (
+    <button className="button" onClick={props.onClick}>
+      {props.text}
+    </button>
+  ) : null
 }
 
 export default GroupPage
