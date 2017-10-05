@@ -43,7 +43,7 @@ class GroupPage extends Component {
     this.setState({ messages })
   }
 
-  showScrambleButton(){
+  showScrambleButton() {
     return !this.state.isMatched && this.state.showScramble
   }
 
