@@ -1,10 +1,13 @@
 @import '_colors';
 @import '_mixins';
+@import '_buttons';
 
 .wrapper {
   margin-top: 25px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .membersContainer {
