@@ -4,18 +4,16 @@ import Spinner from 'react-spinkit'
 import axios from 'axios'
 
 function authCheck() {
-  return axios.get('/api/auth-check')
-    .then(r => {
-      if (r.status === 200) {
-        return true
-      } else {
-        return false
-      }
-    })
+  return axios.get('/api/auth-check').then(r => {
+    if (r.status === 200) {
+      return true
+    } else {
+      return false
+    }
+  })
 }
 
 class LoginRequired extends Component {
-
   constructor() {
     super()
     this.state = {
@@ -27,10 +25,9 @@ class LoginRequired extends Component {
 
   isAuthenticated() {
     //return true
-    authCheck()
-      .then(authcheck => {
-        this.setState({loading: false, authed: authcheck, redirect: !authcheck})
-      })
+    authCheck().then(authcheck => {
+      this.setState({ loading: false, authed: authcheck, redirect: !authcheck })
+    })
   }
 
   componentDidMount() {
@@ -38,22 +35,23 @@ class LoginRequired extends Component {
   }
 
   render() {
-    const {component} = this.props
+    const { component } = this.props
     if (this.state.loading) {
       return <Loading />
     } else {
-      return(
-        this.state.authed ?
-          <Route { ...this.props } component={component} />
-          : this.state.redirect ? <Redirect to="/login" /> : null
-      )
+      return this.state.authed ? (
+        <Route {...this.props} component={component} />
+      ) : this.state.redirect ? (
+        <Redirect to="/login" />
+      ) : null
     }
-
   }
 }
 
 function Loading(props) {
-    return <Spinner name="ball-spin-fade-loader" fadeIn="none" className="spinner" />
+  return (
+    <Spinner name="ball-spin-fade-loader" fadeIn="none" className="spinner" />
+  )
 }
 
 export default LoginRequired
