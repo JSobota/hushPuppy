@@ -135,9 +135,9 @@ module.exports = function(router) {
     .post(function(req, res) {
       console.log(req.body)
       Message.create({
-          message: req.body.message,
-          UserId: req.body.uid,
-          GroupId: req.params.id
+        message: req.body.message,
+        UserId: req.user.id,
+        GroupId: req.params.id
         })
         .then(newMessage => {
           res.status(200).send({ success: true, msg: 'Message created successfully' })
