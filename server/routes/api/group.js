@@ -66,11 +66,36 @@ module.exports = function(router) {
   router.route('/group/:id')
     // Get a list of all memebers, message, and end date
     .get(function(req, res) {
+      // Group.findAll({
+      //   where: {
+      //     id: req.params.id
+      //   },
+      //   attributes: ['id', 'name', 'inviteCode', 'isMatched'],
+      //   include: [{
+      //       model: User,
+      //       attributes: ['id', 'firstname', 'lastname', 'email'],
+      //       through: {
+      //         attributes: ['role', 'matchId']
+      //       }
+      //     },
+      //     {
+      //       model: Message,
+      //       attributes: ['id', 'message', 'createdAt'],
+      //       include: [{
+      //         model: User,
+      //         attributes: ['id', 'firstname', 'lastname', 'email']
+      //       }]
+      //     }
+      //   ]
+      // }).then(results => {
+      //   results = results.map((r) => (r.toJSON()))
+      //   console.log(JSON.stringify(results, null, 2));
+      // })
+
+
       Group.findById(req.params.id).then(group => {
           if (group) {
             group.getUsers({ attributes: ['id', 'firstname', 'lastname', 'email'] }).then(members => {
-              // group.people = members;
-              // console.log(group);
               group = JSON.parse(JSON.stringify(group));
               Object.assign(group, { members: members });
               Message.findAll({
@@ -79,19 +104,19 @@ module.exports = function(router) {
                 }
               }).then(messages => {
                 messages = Promise.all(
-                  messages.map( m => User.findById(m.UserId)
-                                .then(query => ({
-                                  firstName: query.firstname,
-                                  lastName: query.lastname,
-                                  message: m.message
-                                })))
+                  messages.map(m => User.findById(m.UserId)
+                    .then(query => ({
+                      firstName: query.firstname,
+                      lastName: query.lastname,
+                      message: m.message
+                    })))
                 ).then(messagesWithNames => {
                   res.status(200).send((Object.assign(group, { messages: messagesWithNames })));
-                } )
+                })
               })
-                // .then((messages) => {
+              // .then((messages) => {
               // res.status(200).send((Object.assign(group, { messages: messages })));
-                // })
+              // })
 
               // res.status(200).send((Object.assign(group, { members: members })));
             })
@@ -110,9 +135,9 @@ module.exports = function(router) {
     .post(function(req, res) {
       console.log(req.body)
       Message.create({
-        message: req.body.message,
-        UserId: req.user.id,
-        GroupId: req.params.id
+          message: req.body.message,
+          UserId: req.body.uid,
+          GroupId: req.params.id
         })
         .then(newMessage => {
           res.status(200).send({ success: true, msg: 'Message created successfully' })
@@ -141,8 +166,11 @@ module.exports = function(router) {
         })
     })
 
+
+
   router.route('/group/:id/match')
     .get(function(req, res) {
+      // Get User by User ID, find out if the role for the user is the same as Admin
       Group.findById(req.params.id).then(groupResult => {
         if (!groupResult) {
           res.status(400).send({ success: false, msg: 'No group was not found' })
@@ -154,6 +182,12 @@ module.exports = function(router) {
               GroupId: req.params.id
             }
           }).then(results => {
+
+            // Admin check
+            var groupAdmin = results.find(getAdmin);
+            if (parseInt(req.user.id) !== parseInt(groupAdmin.UserId)) {
+              return res.status(400).send({success: false, msg: 'Unauthorized: You are not the group admin'})
+            }
             for (var i = 0; i < results.length; i++) {
               if (i === results.length - 1) {
                 UserGroups.update({
@@ -186,4 +220,8 @@ module.exports = function(router) {
         }
       })
     })
+
+  function getAdmin(user) {
+    return user.role === 'admin';
+  }
 }
