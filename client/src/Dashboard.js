@@ -26,7 +26,6 @@ class Dashboard extends Component {
       if (res.status === 200) {
         this.setState({ loggedIn: true })
         const id = res.data.id
-        console.log(`/api/user/${id}`)
         axios
           .get(`/api/user/${id}`)
           .then(res => {
@@ -36,8 +35,6 @@ class Dashboard extends Component {
             }))
 
             this.setState({ groups })
-
-            console.log(groups)
           })
           .catch(err => console.log(err))
       } else {
