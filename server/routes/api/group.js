@@ -63,6 +63,7 @@ module.exports = function(router) {
         });
     })
 
+
   router.route('/group/:id')
     // Get a list of all memebers, message, and end date
     .get(function(req, res) {
@@ -232,10 +233,10 @@ module.exports = function(router) {
         }).then(results => {
           console.log(results)
           if (results.length <= 0) {
-            res.status(400).send({success: false, msg: 'Current user is not the group admin'})
+            res.status(200).send({success: false, msg: 'Current user is not an admin'})
           }
           else {
-            res.status(200).send({success: true, msg: 'Current user is the group admin'})
+            res.status(200).send({success: true, msg: 'Current user is an admin'})
           }
         })
       })
