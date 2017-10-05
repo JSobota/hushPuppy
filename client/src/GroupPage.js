@@ -6,9 +6,11 @@ import './styles/groupPage.css'
 class GroupPage extends Component {
   constructor() {
     super()
+    this.groupId = null
     this.state = {
       members: [],
-      messages: []
+      messages: [],
+      showScramble: false
     }
   }
 
@@ -19,6 +21,11 @@ class GroupPage extends Component {
       id: m.id
     }))
     this.setState({ members })
+  }
+
+  scramble() {
+    //axios.get(`/api/group/${this.groupId}/match`)
+    alert('lol scramble')
   }
 
   getMessages(data) {
@@ -33,9 +40,9 @@ class GroupPage extends Component {
   }
 
   componentDidMount() {
-    const groupId = this.props.match.params.group
+    this.groupId = this.props.match.params.group
     axios
-      .get(`/api/group/${groupId}`)
+      .get(`/api/group/${this.groupId}`)
       .then(res => {
         this.getMembers(res.data)
         this.getMessages(res.data)
@@ -44,11 +51,11 @@ class GroupPage extends Component {
   }
 
   render() {
-    const groupId = this.props.match.params.group
     return (
       <div>
         <MemberList members={this.state.members} />
-        <MessageDisplay groupId={groupId} messages={this.state.messages} />
+        <Scramble onClick={this.scramble}/>
+        <MessageDisplay groupId={this.groupId} messages={this.state.messages} />
       </div>
     )
   }
@@ -70,4 +77,11 @@ function Member(props) {
     </div>
   )
 }
+
+function Scramble(props) {
+  return (
+      <button onClick={props.onClick}> Scramble </button>
+  )
+}
+
 export default GroupPage
