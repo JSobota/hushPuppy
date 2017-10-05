@@ -1,4 +1,4 @@
-# hushPuppy
+# Hush Puppy
 A "secret Santa' application that allows users to be randomly paired and selected for what ever the occasion calls for.
 
 ## Structure
