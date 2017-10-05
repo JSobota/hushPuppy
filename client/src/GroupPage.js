@@ -10,7 +10,8 @@ class GroupPage extends Component {
     this.state = {
       members: [],
       messages: [],
-      showScramble: false
+      showScramble: false,
+      isMatched: false
     }
   }
 
@@ -24,7 +25,10 @@ class GroupPage extends Component {
   }
 
   scramble() {
-    //axios.get(`/api/group/${this.groupId}/match`)
+    axios.get(`/api/group/${this.groupId}/match`).then(r => {
+      const matched = r.data.success
+      this.setState({ isMatched: matched })
+    })
     alert('lol scramble')
   }
 
@@ -39,11 +43,17 @@ class GroupPage extends Component {
     this.setState({ messages })
   }
 
+  showScrambleButton(){
+    return !this.state.isMatched && this.state.showScramble
+  }
+
   componentDidMount() {
     this.groupId = this.props.match.params.group
     axios
       .get(`/api/group/${this.groupId}`)
       .then(res => {
+        this.setState({ isMatched: res.data.isMatched })
+
         this.getMembers(res.data)
         this.getMessages(res.data)
       })
@@ -52,7 +62,9 @@ class GroupPage extends Component {
     axios
       .get(`/api/group/${this.groupId}/isAdmin`)
       .then(r => {
-        this.setState({showScramble: r.data.success})
+        if (!this.state.isMatched) {
+          this.setState({ showScramble: r.data.success })
+        }
       })
       .catch(err => console.log(err))
   }
@@ -61,7 +73,11 @@ class GroupPage extends Component {
     return (
       <div className="wrapper">
         <MemberList members={this.state.members} />
-        <Scramble show={this.state.showScramble} text="Scramble!" />
+        <Scramble
+          onClick={this.scramble.bind(this)}
+          show={this.showScrambleButton()}
+          text="Scramble!"
+        />
         <MessageDisplay groupId={this.groupId} messages={this.state.messages} />
       </div>
     )
