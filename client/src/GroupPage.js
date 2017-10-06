@@ -75,14 +75,17 @@ class GroupPage extends Component {
       .catch(err => console.log(err))
 
     axios.get(`/api/group/${this.groupId}/usersMatch`)
-
-      .then(r => console.log(r))
+      .then(r =>{
+        const {firstname, lastname} = r.data.match
+        this.setState({partner: `${firstname} ${lastname}`})
+      })
       .catch(err => console.log(err))
   }
 
   render() {
     return (
-      <div className="wrapper">
+        <div className="wrapper">
+        <Partner partner={this.state.partner} />
         <MemberList members={this.state.members} />
         <Scramble
           onClick={this.scramble.bind(this)}
@@ -118,6 +121,12 @@ function Scramble(props) {
       {props.text}
     </button>
   ) : null
+}
+
+function Partner(props) {
+  return (
+    props.partner !== '' ? <div>{props.partner}</div> : null
+  )
 }
 
 export default GroupPage
