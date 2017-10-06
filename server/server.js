@@ -22,7 +22,7 @@ app.use(methodOverride("_method"));
 
 // For Passport
 app.use(session({
-  secret: 'keyboard cat',
+  secret: require('crypto').randomBytes(64).toString('hex'),
   resave: true,
   saveUninitialized: true
 })); // session secret
