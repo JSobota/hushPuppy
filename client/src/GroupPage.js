@@ -10,7 +10,8 @@ class GroupPage extends Component {
     this.state = {
       members: [],
       messages: [],
-      showScramble: false
+      showScramble: false,
+      isMatched: false
     }
   }
 
@@ -24,7 +25,10 @@ class GroupPage extends Component {
   }
 
   scramble() {
-    //axios.get(`/api/group/${this.groupId}/match`)
+    axios.get(`/api/group/${this.groupId}/match`).then(r => {
+      const matched = r.data.success
+      this.setState({ isMatched: matched })
+    })
     alert('lol scramble')
   }
 
@@ -39,22 +43,41 @@ class GroupPage extends Component {
     this.setState({ messages })
   }
 
+  showScrambleButton() {
+    return !this.state.isMatched && this.state.showScramble
+  }
+
   componentDidMount() {
     this.groupId = this.props.match.params.group
     axios
       .get(`/api/group/${this.groupId}`)
       .then(res => {
+        this.setState({ isMatched: res.data.isMatched })
+
         this.getMembers(res.data)
         this.getMessages(res.data)
+      })
+      .catch(err => console.log(err))
+
+    axios
+      .get(`/api/group/${this.groupId}/isAdmin`)
+      .then(r => {
+        if (!this.state.isMatched) {
+          this.setState({ showScramble: r.data.success })
+        }
       })
       .catch(err => console.log(err))
   }
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <MemberList members={this.state.members} />
-        <Scramble onClick={this.scramble}/>
+        <Scramble
+          onClick={this.scramble.bind(this)}
+          show={this.showScrambleButton()}
+          text="Scramble!"
+        />
         <MessageDisplay groupId={this.groupId} messages={this.state.messages} />
       </div>
     )
@@ -64,7 +87,7 @@ class GroupPage extends Component {
 function MemberList(props) {
   const members = props.members.map(m => <Member key={m.id} {...m} />)
   return (
-    <div className="wrapper">
+    <div>
       <div className="membersContainer">{members}</div>
     </div>
   )
@@ -79,9 +102,11 @@ function Member(props) {
 }
 
 function Scramble(props) {
-  return (
-      <button onClick={props.onClick}> Scramble </button>
-  )
+  return props.show ? (
+    <button className="button" onClick={props.onClick}>
+      {props.text}
+    </button>
+  ) : null
 }
 
 export default GroupPage
