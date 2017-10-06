@@ -25,18 +25,17 @@ class GroupPage extends Component {
     this.setState({ members })
   }
 
-  getPartner() {
-    axios.get(`/api/group/${this.groupId}/usersMatch`)
-      .then(r => console.log(r))
-      .catch(err => console.log(err))
-  }
+  // getPartner() {
+  //   return axios.get(`/api/group/${this.groupId}/usersMatch`)
+  //     .then(r => console.log(r))
+  //     .catch(err => console.log(err))
+  // }
 
   scramble() {
     axios.get(`/api/group/${this.groupId}/match`).then(r => {
       const matched = r.data.success
       this.setState({ isMatched: matched })
     })
-    alert('lol scramble')
   }
 
   getMessages(data) {
@@ -73,6 +72,11 @@ class GroupPage extends Component {
           this.setState({ showScramble: r.data.success })
         }
       })
+      .catch(err => console.log(err))
+
+    axios.get(`/api/group/${this.groupId}/usersMatch`)
+
+      .then(r => console.log(r))
       .catch(err => console.log(err))
   }
 
