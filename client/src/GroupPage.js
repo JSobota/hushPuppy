@@ -11,7 +11,8 @@ class GroupPage extends Component {
       members: [],
       messages: [],
       showScramble: false,
-      isMatched: false
+      isMatched: false,
+      partner: ""
     }
   }
 
@@ -22,6 +23,12 @@ class GroupPage extends Component {
       id: m.id
     }))
     this.setState({ members })
+  }
+
+  getPartner() {
+    axios.get(`/api/group/${this.groupId}/usersMatch`)
+      .then(r => console.log(r))
+      .catch(err => console.log(err))
   }
 
   scramble() {
