@@ -3,6 +3,8 @@ const Group = models.Group;
 const User = models.User;
 const Message = models.Message;
 const UserGroups = models.UserGroups;
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 // const { User, Group, Message } = models;
 
 module.exports = function(router) {
@@ -131,14 +133,43 @@ module.exports = function(router) {
         })
     })
 
+  router.route('/group/:id/usersMatch')
+    .get(function(req, res) {
+      if (req.user) {
+        UserGroups.findAll({
+          where: {
+            GroupId: req.params.id,
+            UserId: req.user.id,
+          }
+        }).then(result => {
+          if (result[0].matchId >= 0) {
+            User.findOne({
+              where: {
+                id: result[0].matchId
+              },
+              attributes: ['id', 'firstname', 'lastname', 'email']
+            }).then(user => {
+              if (user != null) {
+                res.status(200).send({ success: true, match: user })
+              }
+            })
+          } else {
+            res.status(200).send({ success: false, msg: 'No match found' })
+          }
+        })
+      } else {
+        res.status(400).send({ success: false, msg: 'No user logged in' })
+      }
+    })
+
   router.route('/group/:id/message')
     // Create messages
     .post(function(req, res) {
       console.log(req.body)
       Message.create({
-        message: req.body.message,
-        UserId: req.user.id,
-        GroupId: req.params.id
+          message: req.body.message,
+          UserId: req.user.id,
+          GroupId: req.params.id
         })
         .then(newMessage => {
           res.status(200).send({ success: true, msg: 'Message created successfully' })
@@ -187,7 +218,7 @@ module.exports = function(router) {
             // Admin check
             var groupAdmin = results.find(getAdmin);
             if (parseInt(req.user.id) !== parseInt(groupAdmin.UserId)) {
-              return res.status(400).send({success: false, msg: 'Unauthorized: You are not the group admin'})
+              return res.status(400).send({ success: false, msg: 'Unauthorized: You are not the group admin' })
             }
             for (var i = 0; i < results.length; i++) {
               if (i === results.length - 1) {
@@ -222,24 +253,23 @@ module.exports = function(router) {
       })
     })
 
-    router.route('/group/:id/isAdmin')
-      .get(function(req, res) {
-        UserGroups.findAll({
-          where: {
-            UserId: req.user.id,
-            GroupId: req.params.id,
-            role: 'admin'
-          }
-        }).then(results => {
-          console.log(results)
-          if (results.length <= 0) {
-            res.status(200).send({success: false, msg: 'Current user is not an admin'})
-          }
-          else {
-            res.status(200).send({success: true, msg: 'Current user is an admin'})
-          }
-        })
+  router.route('/group/:id/isAdmin')
+    .get(function(req, res) {
+      UserGroups.findAll({
+        where: {
+          UserId: req.user.id,
+          GroupId: req.params.id,
+          role: 'admin'
+        }
+      }).then(results => {
+        console.log(results)
+        if (results.length <= 0) {
+          res.status(200).send({ success: false, msg: 'Current user is not an admin' })
+        } else {
+          res.status(200).send({ success: true, msg: 'Current user is an admin' })
+        }
       })
+    })
 
   function getAdmin(user) {
     return user.role === 'admin';
