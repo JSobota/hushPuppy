@@ -4,12 +4,13 @@ module.exports = {
     return queryInterface.createTable('UserGroups', {
       GroupId: {
         type: Sequelize.INTEGER,
-        references: { model: 'Group', key: 'id' },
-        onDelete: 'CASCADE'
+        references: { model: 'Groups', key: 'id' },
+        onDelete: 'CASCADE',
+
       },
       UserId: {
         type: Sequelize.INTEGER,
-        references: { model: 'User', key: 'id' },
+        references: { model: 'Users', key: 'id' },
         onDelete: 'CASCADE'
       },
       role: {
