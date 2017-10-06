@@ -136,31 +136,31 @@ module.exports = function(router) {
   router.route('/group/:id/usersMatch')
     .get(function(req, res) {
       if (req.user) {
-      UserGroups.findAll({
-        where: {
-          GroupId: req.params.id,
-          UserId: req.user.id,
-        }
-      }).then(result => {
-        if (result[0].matchId >= 0) {
-          User.findOne({
-            where: {
-              id: result[0].matchId
-            },
-            attributes: ['id', 'firstname', 'lastname', 'email']
-          }).then(user => {
-            if (user != null) {
-              res.status(200).send({ success: true, match: user })
-            }
-          })
-        } else {
-          res.status(200).send({ success: false, msg: 'No match found' })
-        }
-      })
-    } else {
-      res.status(400).send({success: false, msg: 'No user logged in'})
-    }
-  })
+        UserGroups.findAll({
+          where: {
+            GroupId: req.params.id,
+            UserId: req.user.id,
+          }
+        }).then(result => {
+          if (result[0].matchId >= 0) {
+            User.findOne({
+              where: {
+                id: result[0].matchId
+              },
+              attributes: ['id', 'firstname', 'lastname', 'email']
+            }).then(user => {
+              if (user != null) {
+                res.status(200).send({ success: true, match: user })
+              }
+            })
+          } else {
+            res.status(200).send({ success: false, msg: 'No match found' })
+          }
+        })
+      } else {
+        res.status(400).send({ success: false, msg: 'No user logged in' })
+      }
+    })
 
   router.route('/group/:id/message')
     // Create messages
