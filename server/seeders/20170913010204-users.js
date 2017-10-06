@@ -43,36 +43,28 @@ for (var i = 0; i < 3; i++) {
 }
 
 var membershipData = [];
-for (var i = 1; i < userData.length; i++) {
-  membershipData[i] = {
-    UserId: i,
+for (var i = 0; i < userData.length - 1; i++) {
+  membershipData[i ] = {
+    UserId: i + 1,
     GroupId: ((i % 3) + 1),
+    role: (i < 3) ? 'admin' : 'user',
     createdAt: new Date(),
     updatedAt: new Date()
   }
 }
 
 
-
 module.exports = {
   up: function(queryInterface, Sequelize) {
+    console.log(membershipData[userData.length - 1])
     return queryInterface.bulkInsert('Users', userData)
       .then(() => queryInterface.bulkInsert('Groups', groupData))
-      .then(() => {
-        models.User.findAll().then(userResults => {
-          console.log(userResults);
-          models.Group.findAll().then(groupResults => {
-            console.log(groupResults);
-          })
-        })
-        // queryInterface.bulkInsert('usergroups', membershipData) 
-      })
-
-
+      .then(() => queryInterface.bulkInsert('UserGroups', membershipData))
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('Users', null, {})
+    return queryInterface.bulkDelete('UserGroups', null, {})
+      .then(() => queryInterface.bulkDelete('Users', null, {}))
       .then(() => queryInterface.bulkDelete('Groups', null, {}))
-      .then(() => queryInterface.bulkDelete('UserGroups', null, {}))
+    // .then(() => queryInterface.bulkDelete('UserGroups', null, {}))
   }
 };
