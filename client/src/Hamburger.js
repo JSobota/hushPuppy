@@ -30,6 +30,13 @@ class Hamburger extends Component {
           to="/logout">
           Logout
         </NavLink>
+        <NavLink
+          id="dashboard"
+          className="bm-link hvr-grow"
+          activeClassName="bm-link-highlight"
+          to="/dashboard">
+          Dash
+        </NavLink>
       </Menu>
     )
   }

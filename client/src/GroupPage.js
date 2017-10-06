@@ -6,9 +6,13 @@ import './styles/groupPage.css'
 class GroupPage extends Component {
   constructor() {
     super()
+    this.groupId = null
     this.state = {
       members: [],
-      messages: []
+      messages: [],
+      showScramble: false,
+      isMatched: false,
+      partner: ""
     }
   }
 
@@ -19,6 +23,19 @@ class GroupPage extends Component {
       id: m.id
     }))
     this.setState({ members })
+  }
+
+  // getPartner() {
+  //   return axios.get(`/api/group/${this.groupId}/usersMatch`)
+  //     .then(r => console.log(r))
+  //     .catch(err => console.log(err))
+  // }
+
+  scramble() {
+    axios.get(`/api/group/${this.groupId}/match`).then(r => {
+      const matched = r.data.success
+      this.setState({ isMatched: matched })
+    })
   }
 
   getMessages(data) {
@@ -32,23 +49,50 @@ class GroupPage extends Component {
     this.setState({ messages })
   }
 
+  showScrambleButton() {
+    return !this.state.isMatched && this.state.showScramble
+  }
+
   componentDidMount() {
-    const groupId = this.props.match.params.group
+    this.groupId = this.props.match.params.group
     axios
-      .get(`/api/group/${groupId}`)
+      .get(`/api/group/${this.groupId}`)
       .then(res => {
+        this.setState({ isMatched: res.data.isMatched })
+
         this.getMembers(res.data)
         this.getMessages(res.data)
+      })
+      .catch(err => console.log(err))
+
+    axios
+      .get(`/api/group/${this.groupId}/isAdmin`)
+      .then(r => {
+        if (!this.state.isMatched) {
+          this.setState({ showScramble: r.data.success })
+        }
+      })
+      .catch(err => console.log(err))
+
+    axios.get(`/api/group/${this.groupId}/usersMatch`)
+      .then(r =>{
+        const {firstname, lastname} = r.data.match
+        this.setState({partner: `${firstname} ${lastname}`})
       })
       .catch(err => console.log(err))
   }
 
   render() {
-    const groupId = this.props.match.params.group
     return (
-      <div>
+        <div className="wrapper">
+        <Partner partner={this.state.partner} />
         <MemberList members={this.state.members} />
-        <MessageDisplay groupId={groupId} messages={this.state.messages} />
+        <Scramble
+          onClick={this.scramble.bind(this)}
+          show={this.showScrambleButton()}
+          text="Scramble!"
+        />
+        <MessageDisplay groupId={this.groupId} messages={this.state.messages} />
       </div>
     )
   }
@@ -57,7 +101,7 @@ class GroupPage extends Component {
 function MemberList(props) {
   const members = props.members.map(m => <Member key={m.id} {...m} />)
   return (
-    <div className="wrapper">
+    <div>
       <div className="membersContainer">{members}</div>
     </div>
   )
@@ -70,4 +114,19 @@ function Member(props) {
     </div>
   )
 }
+
+function Scramble(props) {
+  return props.show ? (
+    <button className="button" onClick={props.onClick}>
+      {props.text}
+    </button>
+  ) : null
+}
+
+function Partner(props) {
+  return (
+    props.partner !== '' ? <div>{props.partner}</div> : null
+  )
+}
+
 export default GroupPage
